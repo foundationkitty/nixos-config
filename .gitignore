@@ -1,0 +1,10 @@
+/*
+
+!/.gitignore
+!LICENSE
+!README.md
+
+!i3
+!i3status
+!nixos
+nixos/variables.nix
