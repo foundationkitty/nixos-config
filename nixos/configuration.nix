@@ -49,7 +49,7 @@ in
   services.blueman.enable = true;
 
   # Locales
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = config.timezone;
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {

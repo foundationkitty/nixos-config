@@ -37,6 +37,11 @@
             default = "12345678-0000-0000-0000-abcd00000003";
         };
 
+        timezone = lib.mkOption {
+            type = lib.types.str;
+            default = "UTC";
+        };
+
         user = lib.mkOption {
             type = lib.types.str;
             default = "user";
