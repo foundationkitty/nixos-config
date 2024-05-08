@@ -117,6 +117,7 @@ in
       flameshot
       gzdoom
       imagemagick
+      lxappearance
       ncdu
       niv
       openrct2
@@ -129,6 +130,7 @@ in
   };
 
   # Programs
+  programs.dconf.enable = true;
   programs.firefox.enable = true;
   programs.git.enable = true;
   programs.htop.enable = true;
