@@ -36,15 +36,15 @@ battery all {
 }
 
 disk "/" {
-        format = "%avail/%total"
+        format = "%avail free (%percentage_used use)"
 }
 
 load {
-        format = "%1min/4"
+        format = "load %1min"
 }
 
 memory {
-        format = "%used/%total"
+        format = "mem %percentage_used"
         threshold_degraded = "1G"
         format_degraded = "MEMORY < %available"
 }
