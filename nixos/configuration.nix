@@ -86,6 +86,7 @@ in
         dex
         dmenu
         i3status
+        xss-lock
      ];
     };
   };
@@ -137,7 +138,6 @@ in
   programs.i3lock.enable = true;
   programs.nm-applet.enable = true;
   programs.steam.enable = true;
-  programs.xss-lock.enable = true;
 
   # 32-Bit OpenGL Support
   hardware.opengl.driSupport32Bit = true; 
