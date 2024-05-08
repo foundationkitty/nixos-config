@@ -1,6 +1,8 @@
 # My NixOS Config
 ## Dotfiles for my Panasonic Toughbook CF-19 MK8
 
+![screenshot of desktop](img/desktop.png)
+
 Meant to be cloned on top of `~/.config`
 
 `/etc/nixos/` should be symlinked to `nixos`
