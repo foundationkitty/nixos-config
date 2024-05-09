@@ -123,6 +123,7 @@ in
       ncdu
       niv
       openrct2
+      p7zip
       sbctl
       tree
       unstable.ticktick
