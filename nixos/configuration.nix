@@ -118,6 +118,7 @@ in
       flameshot
       gzdoom
       imagemagick
+      jq
       lxappearance
       ncdu
       niv
@@ -127,6 +128,7 @@ in
       unstable.ticktick
       unzip
       vscodium
+      wireguard-tools
     ];
   };
 
