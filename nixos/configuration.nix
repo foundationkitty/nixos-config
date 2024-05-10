@@ -5,7 +5,7 @@ let
 
     sources = import ./nix/sources.nix;
     lanzaboote = import sources.lanzaboote;
-    unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
+    master = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/master)
     {
       config = config.nixpkgs.config;
     };
@@ -122,11 +122,11 @@ in
       lxappearance
       ncdu
       niv
-      openrct2
       p7zip
       sbctl
       tree
-      unstable.ticktick
+      master.openrct2
+      master.ticktick
       unzip
       vscodium
       wireguard-tools
