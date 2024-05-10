@@ -120,13 +120,14 @@ in
       imagemagick
       jq
       lxappearance
+      master.openrct2
+      master.ticktick
       ncdu
       niv
       p7zip
+      rclone
       sbctl
       tree
-      master.openrct2
-      master.ticktick
       qbittorrent
       unzip
       vscodium
