@@ -127,6 +127,7 @@ in
       tree
       master.openrct2
       master.ticktick
+      qbittorrent
       unzip
       vscodium
       wireguard-tools
