@@ -11,4 +11,4 @@ Copy `nixos/variables.nix.sample` to `nixos/variables.nix` and fill it in with y
 
 A file located at `~/.background-image` will be loaded as the desktop and lockscreen background, it must be in PNG format and should have a resolution of 1024x768
 
-Don't forget to generate a `hardware-configuration.nix` with the `nixos-generate-config` command if neccessary. 
+Don't forget to generate a `hardware-configuration.nix` with the `nixos-generate-config` command if necessary. 

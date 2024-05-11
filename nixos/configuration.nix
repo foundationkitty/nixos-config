@@ -112,26 +112,34 @@ in
     description = config.fullUser;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [ # Non-Module Packages
-      alsa-utils
-      brightnessctl
+
+    # Applications
       discord
       flameshot
+      master.ticktick
+      vscodium
+      qbittorrent
+
+    # Games
       gzdoom
+      master.openrct2
+      master.prismlauncher
+
+    # Tools
+      alsa-utils
+      brightnessctl
       imagemagick
       jq
       lxappearance
-      master.openrct2
-      master.ticktick
       ncdu
       niv
       p7zip
       rclone
       sbctl
       tree
-      qbittorrent
       unzip
-      vscodium
       wireguard-tools
+
     ];
   };
 
