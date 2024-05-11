@@ -21,7 +21,6 @@ bindsym $mod+l exec loginctl lock-session
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # volume and mute controls
-exec --no-startup-id sleep 5; amixer -q -c 0 set Master,0 100% unmute
 exec --no-startup-id sleep 5; amixer -q -c 0 set Headphone,0 100% unmute
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 10%+ unmute && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 10%- unmute && $refresh_i3status
