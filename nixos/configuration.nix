@@ -5,6 +5,7 @@ let
 
     sources = import ./nix/sources.nix;
     lanzaboote = import sources.lanzaboote;
+
     master = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/master)
     {
       config = config.nixpkgs.config;
@@ -20,8 +21,8 @@ in
   # Imports
   imports =
     [
-      ./variables.nix
       ./hardware-configuration.nix
+      ./variables.nix
       lanzaboote.nixosModules.lanzaboote
     ];
 
@@ -30,28 +31,50 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 2;
 
-  # Secureboot
+  boot.initrd.luks.devices."luks-${config.luks-uuid}".device = "/dev/disk/by-uuid/${config.luks-uuid}";
+
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
 
-  # Encryption
-  boot.initrd.luks.devices."luks-${config.luks-uuid}".device = "/dev/disk/by-uuid/${config.luks-uuid}";
+  # Graphics
+  hardware.opengl.driSupport32Bit = true;
+  location.provider = "geoclue2";
+  services.redshift = {
+    enable = true;
+    temperature = {
+      day = 5500;
+      night = 3700;
+    };
+  };
 
   # Networking
   networking.hostName = config.hostname;
   networking.networkmanager.enable = true;
 
-  # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  # Sound
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+  };
+
+  # Printing
+  services.printing.enable = true;
+
   # Locales
   time.timeZone = config.timezone;
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -64,7 +87,20 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  # WM and DM config
+  # Package Settings
+  nixpkgs.config.allowUnfree = true;
+  system.stateVersion = "23.11";
+
+  # Modules
+  programs.dconf.enable = true;
+  programs.firefox.enable = true;
+  programs.git.enable = true;
+  programs.htop.enable = true;
+  programs.i3lock.enable = true;
+  programs.nm-applet.enable = true;
+  programs.steam.enable = true;
+
+  # Desktop Config
   services.xserver = {
     enable = true;
     layout = "us";
@@ -83,30 +119,20 @@ in
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
+
+        alsa-utils
+        brightnessctl
         dex
         dmenu
         i3status
+        lxappearance
         xss-lock
+
      ];
     };
   };
 
-  # Printing
-  services.printing.enable = true;
-
-  # Sound
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-  };
-
-  # User account and packages
+  # User
   users.users.${user} = {
     isNormalUser = true;
     description = config.fullUser;
@@ -126,11 +152,8 @@ in
       master.prismlauncher
 
     # Tools
-      alsa-utils
-      brightnessctl
       imagemagick
       jq
-      lxappearance
       ncdu
       niv
       p7zip
@@ -142,33 +165,5 @@ in
 
     ];
   };
-
-  # Programs
-  programs.dconf.enable = true;
-  programs.firefox.enable = true;
-  programs.git.enable = true;
-  programs.htop.enable = true;
-  programs.i3lock.enable = true;
-  programs.nm-applet.enable = true;
-  programs.steam.enable = true;
-
-  # 32-Bit OpenGL Support
-  hardware.opengl.driSupport32Bit = true; 
-
-  # RedShift Configuration
-  location.provider = "geoclue2";
-  services.redshift = {
-    enable = true;
-    temperature = {
-      day = 5500;
-      night = 3700;
-    };
-  };
-
-  # Unfree Packages
-  nixpkgs.config.allowUnfree = true;
-
-  # System Version
-  system.stateVersion = "23.11";
 }
 
