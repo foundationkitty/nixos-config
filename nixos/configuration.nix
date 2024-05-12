@@ -11,11 +11,6 @@ let
       config = config.nixpkgs.config;
     };
 
-    fullUser = config.fullUser;
-    hostname = config.hostname;
-    luks-uuid = config.luks-uuid;
-    user = config.user;
-
 in
 {
   # Imports
@@ -40,7 +35,9 @@ in
 
   # Graphics
   hardware.opengl.driSupport32Bit = true;
-  location.provider = "geoclue2";
+  location.provider = "manual";
+  location.latitude = config.lat;
+  location.longitude = config.long;
   services.redshift = {
     enable = true;
     temperature = {
@@ -133,7 +130,7 @@ in
   };
 
   # User
-  users.users.${user} = {
+  users.users.${config.user} = {
     isNormalUser = true;
     description = config.fullUser;
     extraGroups = [ "networkmanager" "wheel" ];

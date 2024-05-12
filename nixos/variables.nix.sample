@@ -13,6 +13,16 @@
             default = "myhostname";
         };
 
+        lat = lib.mkOption {
+            type = lib.types.float;
+            default = 51.5;
+        };
+
+        long = lib.mkOption {
+            type = lib.types.float;
+            default = -0.1;
+        };
+
         luks-uuid = lib.mkOption {
             type = lib.types.str;
             default = "12345678-0000-0000-0000-abcd00000002";
