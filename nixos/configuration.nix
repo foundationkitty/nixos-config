@@ -142,9 +142,11 @@ in
     # Applications
       discord
       flameshot
+      modem-manager-gui
       master.ticktick
       vscodium
       qbittorrent
+      master.qgis
 
     # Games
       gzdoom
@@ -157,10 +159,12 @@ in
       ncdu
       niv
       p7zip
+      python3
       rclone
       sbctl
       tree
       unzip
+      virtualenv
       wireguard-tools
 
     ];
