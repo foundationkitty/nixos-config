@@ -139,11 +139,12 @@ in
     # Applications
       discord
       flameshot
+      kodi
       modem-manager-gui
-      master.ticktick
-      vscodium
       qbittorrent
       master.qgis
+      master.ticktick
+      vscodium
 
     # Games
       gzdoom
