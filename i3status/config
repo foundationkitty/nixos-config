@@ -11,6 +11,7 @@ general {
         interval = 5
 }
 
+order += "wireless wwan0"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery all"
@@ -20,6 +21,11 @@ order += "memory"
 order += "read_file brightness"
 order += "volume master"
 order += "tztime local"
+
+wireless wwan0 {
+        format_up = "M: (%ip)"
+        format_down = "M: down"
+}
 
 wireless _first_ {
         format_up = "W: (%quality at %essid)"
