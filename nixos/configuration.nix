@@ -6,7 +6,7 @@ let
     sources = import ./nix/sources.nix;
     lanzaboote = import sources.lanzaboote;
 
-    master = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/master)
+    unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
     {
       config = config.nixpkgs.config;
     };
@@ -142,14 +142,14 @@ in
       kodi
       modem-manager-gui
       qbittorrent
-      master.qgis
-      master.ticktick
+      unstable.qgis-ltr
+      unstable.ticktick
       vscodium
 
     # Games
       gzdoom
-      master.openrct2
-      master.prismlauncher
+      unstable.openrct2
+      prismlauncher
 
     # Tools
       imagemagick
