@@ -88,15 +88,6 @@ in
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "23.11";
 
-  # Modules
-  programs.dconf.enable = true;
-  programs.firefox.enable = true;
-  programs.git.enable = true;
-  programs.htop.enable = true;
-  programs.i3lock.enable = true;
-  programs.nm-applet.enable = true;
-  programs.steam.enable = true;
-
   # Desktop Config
   services.xserver = {
     enable = true;
@@ -129,6 +120,15 @@ in
     };
   };
 
+  # Modules
+  programs.dconf.enable = true;
+  programs.firefox.enable = true;
+  programs.git.enable = true;
+  programs.htop.enable = true;
+  programs.i3lock.enable = true;
+  programs.nm-applet.enable = true;
+  programs.steam.enable = true;
+
   # User
   users.users.${config.user} = {
     isNormalUser = true;
@@ -140,11 +140,14 @@ in
       discord
       dolphin-emu
       flameshot
+      kdenlive
       kodi
       modem-manager-gui
+      obs-studio
       qbittorrent
       unstable.qgis-ltr
       unstable.ticktick
+      vesktop
       vscodium
 
     # Games
