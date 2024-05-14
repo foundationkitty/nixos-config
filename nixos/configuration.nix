@@ -138,6 +138,7 @@ in
 
     # Applications
       discord
+      dolphin-emu
       flameshot
       kodi
       modem-manager-gui
@@ -156,8 +157,11 @@ in
       jq
       ncdu
       niv
+      onboard
       p7zip
       python3
+      qemu-utils
+      unstable.quickemu
       rclone
       sbctl
       tree
