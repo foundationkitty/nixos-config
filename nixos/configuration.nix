@@ -46,6 +46,12 @@ in
     };
   };
 
+  # Fonts
+  fonts.packages = with pkgs; [
+      corefonts
+      vistafonts
+  ];
+
   # Networking
   networking.hostName = config.hostname;
   networking.networkmanager.enable = true;
@@ -138,7 +144,6 @@ in
 
     # Applications
       discord
-      dolphin-emu
       flameshot
       kdenlive
       kodi
@@ -151,6 +156,7 @@ in
       vscodium
 
     # Games
+      dolphin-emu
       gzdoom
       unstable.openrct2
       prismlauncher
