@@ -99,7 +99,6 @@ in
     enable = true;
     layout = "us";
     xkbVariant = "";
-    xautolock.enable = true;
 
     desktopManager = {
       xterm.enable = false;
@@ -120,6 +119,7 @@ in
         dmenu
         i3status
         lxappearance
+        xautolock
         xss-lock
 
      ];

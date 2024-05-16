@@ -27,8 +27,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 10%- unmu
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && $refresh_i3status
 
 # brightness adjustment
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% && brightnessctl get >  ~/.brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- && brightnessctl get >  ~/.brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% && brightnessctl get > ~/.brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- && brightnessctl get > ~/.brightness
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
