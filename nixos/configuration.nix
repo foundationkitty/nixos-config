@@ -11,6 +11,8 @@ let
       config = config.nixpkgs.config;
     };
 
+    panasonic-hbtn = config.boot.kernelPackages.callPackage ./panasonic-hbtn.nix { };
+
 in
 {
   # Imports
@@ -32,6 +34,9 @@ in
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
+
+  boot.extraModulePackages = [ panasonic-hbtn ];
+  boot.kernelModules = [ "panasonic-hbtn" ];
 
   # Graphics
   hardware.opengl.driSupport32Bit = true;

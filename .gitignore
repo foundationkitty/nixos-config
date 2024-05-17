@@ -9,6 +9,7 @@
 !i3status
 !img
 !nixos
+!scripts
 
 nixos/hardware-configuration.nix
 nixos/variables.nix
