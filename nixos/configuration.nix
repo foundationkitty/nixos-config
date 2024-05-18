@@ -81,7 +81,7 @@ in
   services.printing.enable = true;
 
   # Locales
-  time.timeZone = config.timezone;
+  services.automatic-timezoned.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -164,7 +164,7 @@ in
       dolphin-emu
       gzdoom
       unstable.openrct2
-      prismlauncher
+      unstable.prismlauncher
 
     # Tools
       imagemagick
