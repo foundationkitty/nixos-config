@@ -164,7 +164,7 @@ in
       gzdoom
       melonDS
       unstable.openrct2
-      unstable.prismlauncher
+      prismlauncher
 
     # Tools
       imagemagick

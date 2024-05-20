@@ -31,11 +31,9 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% && brigh
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- && brightnessctl get > ~/.brightness
 
 # front panel buttons
-# on screen keyboard
+
 bindcode 147 exec --no-startup-id onboard
-# screen rotation
 bindcode 159 exec --no-startup-id python ~/.config/scripts/rotate.py
-# screen lock
 bindcode 160 exec loginctl lock-session
 
 # Use Mouse+$mod to drag floating windows to their wanted position
