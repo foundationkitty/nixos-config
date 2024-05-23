@@ -57,7 +57,6 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # applications
 bindsym $mod+c exec --no-startup-id discord
 bindsym $mod+i exec --no-startup-id firefox
-bindsym $mod+m exec --no-startup-id kodi
 bindsym $mod+g exec --no-startup-id steam
 
 # change focus

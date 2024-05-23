@@ -81,7 +81,7 @@ in
   services.printing.enable = true;
 
   # Locales
-  services.automatic-timezoned.enable = true;
+  time.timeZone = config.timezone;
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -151,7 +151,6 @@ in
       discord
       flameshot
       kdenlive
-      kodi
       modem-manager-gui
       obs-studio
       qbittorrent
@@ -163,6 +162,7 @@ in
     # Games
       dolphin-emu
       gzdoom
+      melonDS
       unstable.openrct2
       unstable.prismlauncher
 
