@@ -125,6 +125,7 @@ in
         i3status
         lxappearance
         xautolock
+        xorg.xmodmap
         xss-lock
 
      ];

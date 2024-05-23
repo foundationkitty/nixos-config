@@ -36,6 +36,18 @@ bindcode 147 exec --no-startup-id onboard
 bindcode 159 exec --no-startup-id python ~/.config/scripts/rotate.py
 bindcode 160 exec loginctl lock-session
 
+# set Fn+F9 to exit i3
+bindcode 244 exit
+
+# fix broken tablet -> laptop conversion behavior
+exec --no-startup-id sleep 5; xmodmap -e 'keycode 150='
+
+# shortcut to launch modem-manager-gui
+bindsym $mod+m exec modem-manager-gui
+
+# shortcut to reload nm-applet
+bindsym $mod+n exec systemctl --user restart nm-applet
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
