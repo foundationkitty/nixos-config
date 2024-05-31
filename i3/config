@@ -34,13 +34,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- && bri
 
 bindcode 147 exec --no-startup-id onboard
 bindcode 159 exec --no-startup-id python ~/.config/scripts/rotate.py
-bindcode 160 exec loginctl lock-session
+bindcode 160 exec systemctl suspend
 
 # set Fn+F9 to exit i3
 bindcode 244 exit
-
-# fix broken tablet -> laptop conversion behavior
-exec --no-startup-id sleep 5; xmodmap -e 'keycode 150='
 
 # shortcut to launch modem-manager-gui
 bindsym $mod+m exec modem-manager-gui

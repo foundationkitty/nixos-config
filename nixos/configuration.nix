@@ -125,7 +125,6 @@ in
         i3status
         lxappearance
         xautolock
-        xorg.xmodmap
         xss-lock
 
      ];
@@ -160,13 +159,6 @@ in
       vesktop
       vscodium
 
-    # Games
-      dolphin-emu
-      gzdoom
-      melonDS
-      unstable.openrct2
-      prismlauncher
-
     # Tools
       imagemagick
       jq
@@ -184,6 +176,20 @@ in
       virtualenv
       wireguard-tools
 
+    # Games
+      dolphin-emu
+      gzdoom
+      unstable.openrct2
+      prismlauncher
+      (retroarch.override {
+        cores = with libretro; [
+          fceumm
+          melonds
+          mgba
+          mupen64plus
+          snes9x
+        ];
+      })
     ];
   };
 }
