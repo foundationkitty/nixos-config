@@ -118,7 +118,6 @@ in
 
         alsa-utils
         brightnessctl
-        dex
         dmenu
         i3status
         lxappearance
