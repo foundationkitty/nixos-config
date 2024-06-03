@@ -97,22 +97,20 @@ in
 
   # Package Settings
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "23.11";
+  system.stateVersion = config.stateVersion;
+
 
   # Desktop Config
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
 
     desktopManager = {
       xterm.enable = false;
     };
-   
-    displayManager = {
-      lightdm.enable = true;
-      autoLogin.user = config.user;
-    };
+
+    displayManager.lightdm.enable = true;
 
     windowManager.i3 = {
       enable = true;
@@ -130,6 +128,8 @@ in
      ];
     };
   };
+
+  services.displayManager.autoLogin.user = config.user;
 
   # Modules
   programs.dconf.enable = true;
@@ -154,12 +154,13 @@ in
       modem-manager-gui
       obs-studio
       qbittorrent
-      unstable.qgis-ltr
+      qgis-ltr
       unstable.ticktick
       vesktop
       vscodium
 
     # Tools
+      file
       imagemagick
       jq
       ncdu
@@ -167,8 +168,6 @@ in
       onboard
       p7zip
       python3
-      qemu-utils
-      unstable.quickemu
       rclone
       sbctl
       tree
@@ -179,7 +178,7 @@ in
     # Games
       dolphin-emu
       gzdoom
-      unstable.openrct2
+      openrct2
       prismlauncher
       (retroarch.override {
         cores = with libretro; [

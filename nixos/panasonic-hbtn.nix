@@ -5,10 +5,10 @@ stdenv.mkDerivation rec {
   version = "0";
 
   src = fetchFromGitHub {
-    owner = "cyberpunkcoder";
+    owner = "foundationkitty";
     repo = "panasonic-hbtn";
-    rev = "ee9f346";
-    sha256 = "/QuBNwmxpIx+id+6paYjYvOztpSJIJmSwZKj2nC2y4U=";
+    rev = "4534dec";
+    sha256 = "9GDG+3EwiJQ+0FDliFe4AtB1LbQ+9UZozgCzx320F0s=";
   };
 
   KVER = "${kernel.modDirVersion}";
