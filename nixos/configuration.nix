@@ -181,6 +181,7 @@ in
       prismlauncher
       (retroarch.override {
         cores = with libretro; [
+          easyrpg
           fceumm
           melonds
           mgba
