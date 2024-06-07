@@ -65,6 +65,12 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  services.gpsd = {
+    enable = true;
+    devices = [ config.gps-device ];
+    extraArgs = config.gps-device-args;
+  };
+
   # Sound
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -143,23 +149,24 @@ in
   users.users.${config.user} = {
     isNormalUser = true;
     description = config.fullUser;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "gpsd" "networkmanager" "wheel" ];
     packages = with pkgs; [ # Non-Module Packages
 
     # Applications
       discord
       flameshot
+      foxtrotgps
       kdenlive
       modem-manager-gui
       obs-studio
       qbittorrent
-      qgis-ltr
       unstable.ticktick
       vesktop
       vscodium
 
     # Tools
       file
+      gpsd
       imagemagick
       jq
       ncdu
