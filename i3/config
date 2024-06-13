@@ -21,7 +21,7 @@ set $refresh_i3status killall -SIGUSR1 i3status
 
 # volume and mute controls
 exec --no-startup-id sleep 5; amixer -q -c 0 set Headphone,0 100% unmute
-exec --no-startup-id volumeicon
+exec --no-startup-id sleep 5; volumeicon
 
 # brightness adjustment
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% && brightnessctl get > ~/.brightness
