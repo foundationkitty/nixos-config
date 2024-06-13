@@ -19,7 +19,6 @@ order += "disk /"
 order += "load"
 order += "memory"
 order += "read_file brightness"
-order += "volume master"
 order += "tztime local"
 
 wireless wwan0 {
@@ -57,12 +56,6 @@ memory {
 
 tztime local {
         format = "%m-%d-%Y %I:%M%p"
-}
-
-volume master {
-        format = "%volume 🎧"
-        format_muted = "%volume ❌"
-        device = "default"
 }
 
 read_file brightness {

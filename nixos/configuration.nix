@@ -162,6 +162,7 @@ in
       qbittorrent
       unstable.ticktick
       vesktop
+      volumeicon
       vscodium
 
     # Tools
