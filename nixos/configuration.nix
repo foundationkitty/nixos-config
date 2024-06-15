@@ -159,6 +159,7 @@ in
       discord
       flameshot
       foxtrotgps
+      gpxsee
       kdenlive
       modem-manager-gui
       obs-studio
