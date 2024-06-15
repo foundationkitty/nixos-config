@@ -10,6 +10,10 @@ let
     {
       config = config.nixpkgs.config;
     };
+    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/master)
+    {
+      config = config.nixpkgs.config;
+    };
 
     panasonic-hbtn = config.boot.kernelPackages.callPackage ./panasonic-hbtn.nix { };
 
@@ -65,6 +69,7 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  # Location
   services.gpsd = {
     enable = true;
     devices = [ config.gps-device ];
@@ -161,10 +166,11 @@ in
       foxtrotgps
       gpxsee
       kdenlive
+      merkaartor
       modem-manager-gui
       obs-studio
       unstable.qbittorrent
-      ticktick
+      myfork.ticktick
       vesktop
       volumeicon
       unstable.vscodium
