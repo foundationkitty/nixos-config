@@ -71,6 +71,10 @@ in
     extraArgs = config.gps-device-args;
   };
 
+  users.users.gpsd = {
+    extraGroups = [ "dialout" ];
+  };
+
   # Sound
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -104,7 +108,6 @@ in
   # Package Settings
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = config.stateVersion;
-
 
   # Desktop Config
   services.xserver = {
@@ -160,7 +163,7 @@ in
       modem-manager-gui
       obs-studio
       qbittorrent
-      unstable.ticktick
+      ticktick
       vesktop
       volumeicon
       vscodium
@@ -175,6 +178,8 @@ in
       onboard
       p7zip
       python3
+      qemu-utils
+      quickemu
       rclone
       sbctl
       tree
