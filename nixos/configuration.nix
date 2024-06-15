@@ -190,7 +190,7 @@ in
     # Games
       unstable.dolphin-emu
       gzdoom
-      unstable.melonds
+      unstable.melonDS
       openrct2
       prismlauncher
       (unstable.retroarch.override {
