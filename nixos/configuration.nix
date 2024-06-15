@@ -162,11 +162,11 @@ in
       kdenlive
       modem-manager-gui
       obs-studio
-      qbittorrent
+      unstable.qbittorrent
       ticktick
       vesktop
       volumeicon
-      vscodium
+      unstable.vscodium
 
     # Tools
       file
@@ -188,15 +188,15 @@ in
       wireguard-tools
 
     # Games
-      dolphin-emu
+      unstable.dolphin-emu
       gzdoom
+      unstable.melonds
       openrct2
       prismlauncher
-      (retroarch.override {
+      (unstable.retroarch.override {
         cores = with libretro; [
           easyrpg
           fceumm
-          melonds
           mgba
           mupen64plus
           snes9x
