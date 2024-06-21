@@ -10,10 +10,11 @@ let
     {
       config = config.nixpkgs.config;
     };
-    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/master)
-    {
-      config = config.nixpkgs.config;
-    };
+
+#    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/master)
+#    {
+#      config = config.nixpkgs.config;
+#    };
 
     panasonic-hbtn = config.boot.kernelPackages.callPackage ./panasonic-hbtn.nix { };
 
@@ -32,8 +33,6 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 2;
 
-  boot.initrd.luks.devices."luks-${config.luks-uuid}".device = "/dev/disk/by-uuid/${config.luks-uuid}";
-
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
@@ -42,11 +41,17 @@ in
   boot.extraModulePackages = [ panasonic-hbtn ];
   boot.kernelModules = [ "panasonic-hbtn" ];
 
+  swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = config.swapSize;
+   } ];
+
   # Graphics
   hardware.opengl.driSupport32Bit = true;
   location.provider = "manual";
   location.latitude = config.lat;
   location.longitude = config.long;
+
   services.redshift = {
     enable = true;
     temperature = {
@@ -170,7 +175,7 @@ in
       modem-manager-gui
       obs-studio
       unstable.qbittorrent
-      myfork.ticktick
+      unstable.ticktick
       vesktop
       volumeicon
       unstable.vscodium
@@ -185,8 +190,6 @@ in
       onboard
       p7zip
       python3
-      qemu-utils
-      quickemu
       rclone
       sbctl
       tree

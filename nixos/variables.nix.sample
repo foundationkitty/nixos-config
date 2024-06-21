@@ -33,14 +33,14 @@
             default = -0.1;
         };
 
-        luks-uuid = lib.mkOption {
-            type = lib.types.str;
-            default = "12345678-0000-0000-0000-abcd00000002";
-        };
-
         stateVersion = lib.mkOption {
             type = lib.types.str;
             default = "24.05";
+        };
+
+        swapSize = lib.mkOption {
+            type = lib.types.int;
+            default = 8192;
         };
 
         timezone = lib.mkOption {
