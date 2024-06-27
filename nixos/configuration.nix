@@ -48,6 +48,7 @@ in
 
   # Graphics
   hardware.opengl.driSupport32Bit = true;
+
   location.provider = "manual";
   location.latitude = config.lat;
   location.longitude = config.long;
@@ -169,8 +170,8 @@ in
       discord
       flameshot
       foxtrotgps
-      gpxsee
-      kdenlive
+      unstable.gpxsee
+      unstable.kdenlive
       merkaartor
       modem-manager-gui
       obs-studio
