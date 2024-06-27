@@ -1,5 +1,5 @@
-# My NixOS Config
-## Dotfiles for my Panasonic Toughbook CF-19 MK8
+# foundationkitty's NixOS Config (CF-19-8)
+## .config files for my Panasonic Toughbook CF-19 MK8
 
 ![screenshot of desktop](img/desktop.png)
 
