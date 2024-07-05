@@ -171,6 +171,7 @@ in
       flameshot
       foxtrotgps
       unstable.gpxsee
+      jellyfin
       unstable.kdenlive
       merkaartor
       modem-manager-gui
@@ -186,6 +187,7 @@ in
       gpsd
       imagemagick
       jq
+      mlt
       ncdu
       niv
       onboard
