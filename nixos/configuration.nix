@@ -202,6 +202,7 @@ in
 
     # Games
       unstable.dolphin-emu
+      unstable.duckstation
       gzdoom
       unstable.melonDS
       openrct2
