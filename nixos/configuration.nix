@@ -11,10 +11,10 @@ let
       config = config.nixpkgs.config;
     };
 
-    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/master)
-    {
-      config = config.nixpkgs.config;
-    };
+#    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/master)
+#    {
+#      config = config.nixpkgs.config;
+#    };
 
     panasonic-hbtn = config.boot.kernelPackages.callPackage ./panasonic-hbtn.nix { };
 
@@ -177,7 +177,7 @@ in
       modem-manager-gui
       obs-studio
       unstable.qbittorrent
-      myfork.ticktick
+      unstable.ticktick
       vesktop
       volumeicon
       unstable.vscodium
