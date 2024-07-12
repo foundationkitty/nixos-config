@@ -11,5 +11,6 @@
 !nixos
 !scripts
 
+nixos/device-conf.nix
 nixos/hardware-configuration.nix
 nixos/variables.nix

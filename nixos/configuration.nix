@@ -16,13 +16,12 @@ let
 #      config = config.nixpkgs.config;
 #    };
 
-    panasonic-hbtn = config.boot.kernelPackages.callPackage ./panasonic-hbtn.nix { };
-
 in
 {
   # Imports
   imports =
     [
+      ./device-conf.nix
       ./hardware-configuration.nix
       ./variables.nix
       lanzaboote.nixosModules.lanzaboote
@@ -38,9 +37,6 @@ in
     pkiBundle = "/etc/secureboot";
   };
 
-  boot.extraModulePackages = [ panasonic-hbtn ];
-  boot.kernelModules = [ "panasonic-hbtn" ];
-
   swapDevices = [ {
     device = "/var/lib/swapfile";
     size = config.swapSize;
@@ -48,10 +44,6 @@ in
 
   # Graphics
   hardware.opengl.driSupport32Bit = true;
-
-  location.provider = "manual";
-  location.latitude = config.lat;
-  location.longitude = config.long;
 
   services.redshift = {
     enable = true;
@@ -74,17 +66,6 @@ in
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
-
-  # Location
-  services.gpsd = {
-    enable = true;
-    devices = [ config.gps-device ];
-    extraArgs = config.gps-device-args;
-  };
-
-  users.users.gpsd = {
-    extraGroups = [ "dialout" ];
-  };
 
   # Sound
   hardware.pulseaudio.enable = false;
