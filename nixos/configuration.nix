@@ -159,7 +159,7 @@ in
       obs-studio
       unstable.qbittorrent
       unstable.ticktick
-      vesktop
+      unstable.vesktop
       volumeicon
       unstable.vscodium
 
@@ -172,21 +172,23 @@ in
       ncdu
       niv
       onboard
+      openresolv
       p7zip
-      python3
-      rclone
-      sbctl
-      tree
+      python3 # held back
+      unstable.rclone
+      sbctl # held back
+      tree # held back
       unzip
-      virtualenv
+      virtualenv # held back
       wireguard-tools
+      xxd # held back
 
     # Games
       unstable.dolphin-emu
       unstable.duckstation
       gzdoom
       unstable.melonDS
-      openrct2
+      unstable.openrct2
       prismlauncher
       (unstable.retroarch.override {
         cores = with libretro; [
