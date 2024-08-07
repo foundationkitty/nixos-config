@@ -149,14 +149,12 @@ in
 
     # Applications
       discord
-      flameshot
+      unstable.flameshot
       foxtrotgps
       unstable.gpxsee
       jellyfin
       unstable.kdenlive
-      merkaartor
       modem-manager-gui
-      obs-studio
       unstable.qbittorrent
       unstable.ticktick
       unstable.vesktop
@@ -189,7 +187,7 @@ in
       gzdoom
       unstable.melonDS
       unstable.openrct2
-      prismlauncher
+      unstable.prismlauncher
       (unstable.retroarch.override {
         cores = with libretro; [
           easyrpg
