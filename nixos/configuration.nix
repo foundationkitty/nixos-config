@@ -167,7 +167,7 @@ in
       imagemagick
       jq
       mlt
-      ncdu
+      ncdu # held back
       niv
       onboard
       openresolv
