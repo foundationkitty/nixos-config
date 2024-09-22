@@ -13,15 +13,14 @@ exec --no-startup-id blueman-applet
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --image .background-image
-exec --no-startup-id xautolock -time 5 -locker "loginctl lock-session"
 bindsym $mod+l exec loginctl lock-session
 
 # i3status refresh call
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # volume and mute controls
-exec --no-startup-id sleep 5; amixer -q -c 0 set Headphone,0 100% unmute
 exec --no-startup-id sleep 5; volumeicon
+exec --no-startup-id sleep 10; amixer -q -c 0 set Headphone,0 100% unmute
 
 # brightness adjustment
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% && brightnessctl get > ~/.brightness

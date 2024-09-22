@@ -122,7 +122,6 @@ in
         dmenu
         i3status
         lxappearance
-        xautolock
         xss-lock
 
      ];
@@ -162,6 +161,7 @@ in
       unstable.vscodium
 
     # Tools
+      appimage-run
       file
       gpsd
       imagemagick
