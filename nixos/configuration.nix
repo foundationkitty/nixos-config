@@ -151,7 +151,10 @@ in
       unstable.flameshot
       foxtrotgps
       unstable.gpxsee
+      hunspell
+      hunspellDicts.en_US
       jellyfin
+      libreoffice
       unstable.kdenlive
       modem-manager-gui
       unstable.qbittorrent
