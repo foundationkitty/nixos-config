@@ -148,18 +148,18 @@ in
 
     # Applications
       discord
-      unstable.flameshot
+      flameshot
       foxtrotgps
-      unstable.gpxsee
+      gpxsee
       hunspell
       hunspellDicts.en_US
       jellyfin
       libreoffice
-      unstable.kdenlive
+      kdenlive
       modem-manager-gui
-      unstable.qbittorrent
-      unstable.ticktick
-      unstable.vesktop
+      qbittorrent
+      ticktick
+      vesktop
       volumeicon
       unstable.vscodium
 
@@ -170,28 +170,27 @@ in
       imagemagick
       jq
       mlt
-      ncdu # held back
+      ncdu
       niv
       onboard
       openresolv
       p7zip
-      python3 # held back
-      unstable.rclone
-      sbctl # held back
-      tree # held back
+      python3
+      rclone
+      sbctl
+      tree
       unzip
-      virtualenv # held back
+      virtualenv
       wireguard-tools
-      xxd # held back
+      xxd
 
     # Games
-      unstable.dolphin-emu
-      unstable.duckstation
+      dolphin-emu
       gzdoom
       unstable.melonDS
-      unstable.openrct2
-      unstable.prismlauncher
-      (unstable.retroarch.override {
+      openrct2
+      prismlauncher
+      (retroarch.override {
         cores = with libretro; [
           easyrpg
           fceumm
