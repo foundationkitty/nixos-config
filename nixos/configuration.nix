@@ -43,7 +43,7 @@ in
    } ];
 
   # Graphics
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
 
   services.redshift = {
     enable = true;
@@ -136,6 +136,7 @@ in
   programs.git.enable = true;
   programs.htop.enable = true;
   programs.i3lock.enable = true;
+  programs.nix-ld.enable = true;
   programs.nm-applet.enable = true;
   programs.steam.enable = true;
 
@@ -165,6 +166,7 @@ in
 
     # Tools
       appimage-run
+      corepack
       file
       gpsd
       imagemagick
