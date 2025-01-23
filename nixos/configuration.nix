@@ -11,7 +11,7 @@ let
       config = config.nixpkgs.config;
     };
 
-#    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/master)
+#    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
 #    {
 #      config = config.nixpkgs.config;
 #    };
@@ -149,48 +149,48 @@ in
 
     # Applications
       discord
-      flameshot
+      unstable.flameshot
       foxtrotgps
-      gpxsee
+      unstable.gpxsee
       hunspell
       hunspellDicts.en_US
       jellyfin
       libreoffice
       kdenlive
       modem-manager-gui
-      qbittorrent
-      ticktick
+      unstable.qbittorrent
+      unstable.ticktick
       vesktop
       volumeicon
       unstable.vscodium
 
     # Tools
-      appimage-run
-      corepack
-      file
+      unstable.appimage-run
+      unstable.corepack
+      unstable.file
       gpsd
-      imagemagick
+      unstable.imagemagick
       jq
       mlt
-      ncdu
+      unstable.ncdu
       niv
       onboard
       openresolv
       p7zip
       python3
-      rclone
-      sbctl
-      tree
+      unstable.rclone
+      unstable.sbctl
+      unstable.tree
       unzip
       virtualenv
       wireguard-tools
       xxd
 
     # Games
-      dolphin-emu
-      gzdoom
+      unstable.dolphin-emu
+      unstable.gzdoom
       unstable.melonDS
-      openrct2
+      unstable.openrct2
       prismlauncher
       (retroarch.override {
         cores = with libretro; [
