@@ -3,6 +3,11 @@
 {
   options = {
 
+        bootLoaderTimeout = lib.mkOption {
+            type = lib.types.str;
+            default = 5;
+        };
+
         fullUser = lib.mkOption {
             type = lib.types.str;
             default = "User";

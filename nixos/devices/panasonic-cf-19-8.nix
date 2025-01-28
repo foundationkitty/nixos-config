@@ -29,5 +29,33 @@ in
   users.users.gpsd = {
     extraGroups = [ "dialout" ];
   };
-}
 
+  # Desktop Config
+
+    services.xserver = {
+    enable = true;
+    xkb.layout = "us";
+    xkb.variant = "";
+
+    desktopManager = {
+      xterm.enable = false;
+    };
+
+    displayManager.lightdm.enable = true;
+
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+
+        dmenu
+        i3status
+        lxappearance
+        xss-lock
+
+     ];
+    };
+  };
+
+  programs.i3lock.enable = true;
+
+}

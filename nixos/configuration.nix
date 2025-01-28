@@ -30,7 +30,7 @@ in
   # Bootloader
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 2;
+  boot.loader.timeout = config.bootLoaderTimeout;
 
   boot.lanzaboote = {
     enable = true;
@@ -101,33 +101,6 @@ in
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = config.stateVersion;
 
-  # Desktop Config
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-
-    desktopManager = {
-      xterm.enable = false;
-    };
-
-    displayManager.lightdm.enable = true;
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-
-        alsa-utils
-        brightnessctl
-        dmenu
-        i3status
-        lxappearance
-        xss-lock
-
-     ];
-    };
-  };
-
   services.displayManager.autoLogin.user = config.user;
 
   # Modules
@@ -135,7 +108,6 @@ in
   programs.firefox.enable = true;
   programs.git.enable = true;
   programs.htop.enable = true;
-  programs.i3lock.enable = true;
   programs.nix-ld.enable = true;
   programs.nm-applet.enable = true;
   programs.steam.enable = true;
@@ -165,7 +137,9 @@ in
       unstable.vscodium
 
     # Tools
+      alsa-utils
       unstable.appimage-run
+      brightnessctl
       unstable.corepack
       unstable.file
       gpsd
