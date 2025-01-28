@@ -2,13 +2,13 @@
 ## .config files for my devices:
 ### - Panasonic Toughbook CF-19-8
 
-![screenshot of desktop](img/desktop.png)
+![screenshot of desktop](img/cf-19-desktop.png)
 
 Meant to be cloned on top of `~/.config`
 
 `/etc/nixos/` should be symlinked to `nixos`
 
-Copy `nixos/<device-model>.nix` to `device-conf.nix`
+Copy `nixos/devices/<device-model>.nix` to `nixos/device-conf.nix`
 
 Copy `nixos/variables.nix.sample` to `nixos/variables.nix` and fill it in with your information
 

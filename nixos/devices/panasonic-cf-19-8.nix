@@ -3,7 +3,7 @@
 # Variables
 let
 
-    panasonic-hbtn = config.boot.kernelPackages.callPackage ./panasonic-hbtn.nix { };
+    panasonic-hbtn = config.boot.kernelPackages.callPackage ./pkgs/panasonic-hbtn.nix { };
 
 in
 {
