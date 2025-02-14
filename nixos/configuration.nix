@@ -11,10 +11,10 @@ let
       config = config.nixpkgs.config;
     };
 
-#    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
-#    {
-#      config = config.nixpkgs.config;
-#    };
+    #myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
+    #{
+    #  config = config.nixpkgs.config;
+    #};
 
 in
 {
@@ -121,39 +121,31 @@ in
 
     # Applications
       discord
-      unstable.flameshot
-      foxtrotgps
-      unstable.gpxsee
       hunspell
       hunspellDicts.en_US
-      jellyfin
       libreoffice
       kdenlive
-      modem-manager-gui
       unstable.qbittorrent
       unstable.ticktick
       vesktop
-      volumeicon
       unstable.vscodium
 
     # Tools
       alsa-utils
       unstable.appimage-run
-      brightnessctl
       unstable.corepack
       unstable.file
-      gpsd
       unstable.imagemagick
       jq
       mlt
       unstable.ncdu
       niv
-      onboard
       openresolv
       p7zip
       python3
       unstable.rclone
       unstable.sbctl
+      signal-desktop
       unstable.tree
       unzip
       virtualenv

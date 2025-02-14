@@ -47,9 +47,18 @@ in
       enable = true;
       extraPackages = with pkgs; [
 
+        brightnessctl
         dmenu
+        flameshot
+        foxtrotgps
+        gpsd
+        gpxsee
+        jellyfin
+        onboard
         i3status
         lxappearance
+        modem-manager-gui
+        volumeicon
         xss-lock
 
      ];
