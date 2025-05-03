@@ -135,6 +135,7 @@ in
       unstable.appimage-run
       unstable.corepack
       unstable.file
+      unstable.git-credential-manager
       unstable.imagemagick
       jq
       mlt
