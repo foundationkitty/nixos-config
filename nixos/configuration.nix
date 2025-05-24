@@ -68,7 +68,7 @@ in
   services.blueman.enable = true;
 
   # Sound
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -124,50 +124,48 @@ in
       hunspell
       hunspellDicts.en_US
       libreoffice
-      kdenlive
-      unstable.qbittorrent
-      unstable.ticktick
+      kdePackages.kdenlive
+      qbittorrent
+      ticktick
       vesktop
-      unstable.vscodium
+      vscodium
 
     # Tools
       alsa-utils
-      unstable.appimage-run
-      unstable.corepack
-      unstable.file
-      unstable.git-credential-manager
-      unstable.imagemagick
+      appimage-run
+      corepack
+      file
+      git-credential-manager
+      imagemagick
       jq
       mlt
-      unstable.ncdu
+      ncdu
       niv
       openresolv
       p7zip
       python3
-      unstable.rclone
-      unstable.sbctl
+      rclone
+      sbctl
       signal-desktop
-      unstable.tree
+      tree
       unzip
       virtualenv
       wireguard-tools
       xxd
 
     # Games
-      unstable.dolphin-emu
-      unstable.gzdoom
-      unstable.melonDS
-      unstable.openrct2
+      dolphin-emu
+      gzdoom
+      melonDS
+      openrct2
       prismlauncher
-      (retroarch.override {
-        cores = with libretro; [
-          easyrpg
-          fceumm
-          mgba
-          mupen64plus
-          snes9x
-        ];
-      })
+      (retroarch.withCores (cores: with cores; [
+        easyrpg
+        fceumm
+        mgba
+        mupen64plus
+        snes9x
+      ]))
     ];
   };
 }
