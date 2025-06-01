@@ -124,6 +124,7 @@ in
       hunspell
       hunspellDicts.en_US
       libreoffice
+      kdePackages.kcalc
       kdePackages.kdenlive
       qbittorrent
       ticktick
@@ -136,6 +137,7 @@ in
       corepack
       file
       git-credential-manager
+      hardinfo2
       imagemagick
       jq
       mlt
