@@ -120,15 +120,16 @@ in
     packages = with pkgs; [ # Non-Module Packages
 
     # Applications
+      unstable.calibre
       discord
       hunspell
       hunspellDicts.en_US
       libreoffice
       kdePackages.kdenlive
-      qbittorrent
-      ticktick
+      unstable.qbittorrent
+      unstable.ticktick
       vesktop
-      vscodium
+      unstable.vscodium
 
     # Tools
       alsa-utils
@@ -157,7 +158,7 @@ in
       dolphin-emu
       gzdoom
       melonDS
-      openrct2
+      unstable.openrct2
       prismlauncher
       (retroarch.withCores (cores: with cores; [
         easyrpg
