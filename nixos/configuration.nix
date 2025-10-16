@@ -67,6 +67,11 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  services.resolved.enable = true;
+
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = unstable.mullvad-vpn;
+
   # Sound
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
