@@ -89,17 +89,17 @@ in
 
   # Locales
   time.timeZone = config.timezone;
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = config.locale;
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS = config.locale;
+    LC_IDENTIFICATION = config.locale;
+    LC_MEASUREMENT = config.locale;
+    LC_MONETARY = config.locale;
+    LC_NAME = config.locale;
+    LC_NUMERIC = config.locale;
+    LC_PAPER = config.locale;
+    LC_TELEPHONE = config.locale;
+    LC_TIME = config.locale;
   };
 
   # Package Settings
@@ -163,7 +163,7 @@ in
       dolphin-emu
       gzdoom
       melonDS
-      unstable.openrct2
+      openrct2
       prismlauncher
       (retroarch.withCores (cores: with cores; [
         easyrpg

@@ -38,9 +38,14 @@
             default = -0.1;
         };
 
+        locale = lib.mkOption {
+            type = lib.types.str;
+            default = "en_US.UTF-8";
+        };
+
         stateVersion = lib.mkOption {
             type = lib.types.str;
-            default = "24.11";
+            default = "25.11";
         };
 
         swapSize = lib.mkOption {
