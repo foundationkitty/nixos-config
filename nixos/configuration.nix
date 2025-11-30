@@ -56,7 +56,7 @@ in
   # Fonts
   fonts.packages = with pkgs; [
       corefonts
-      vistafonts
+      vista-fonts
   ];
 
   # Networking
@@ -125,16 +125,17 @@ in
     packages = with pkgs; [ # Non-Module Packages
 
     # Applications
-      unstable.calibre
+      calibre
       discord
       hunspell
       hunspellDicts.en_US
       libreoffice
       kdePackages.kdenlive
-      unstable.qbittorrent
-      unstable.ticktick
+      protonvpn-gui
+      qbittorrent
+      ticktick
       vesktop
-      unstable.vscodium
+      vscodium
 
     # Tools
       alsa-utils
@@ -160,7 +161,7 @@ in
       xxd
 
     # Games
-      dolphin-emu
+      unstable.dolphin-emu
       gzdoom
       melonDS
       openrct2
