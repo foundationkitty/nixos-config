@@ -34,12 +34,6 @@ exec --no-startup-id sleep 10; amixer -q -c 0 set Headphone,0 100% unmute
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% && brightnessctl get > ~/.brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- && brightnessctl get > ~/.brightness
 
-# front panel buttons
-
-bindcode 147 exec --no-startup-id onboard
-bindcode 159 exec --no-startup-id python ~/.config/scripts/cf-19-rotate.py
-bindcode 160 exec systemctl suspend
-
 # set Fn+F9 to exit i3
 bindcode 244 exit
 
@@ -168,8 +162,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status
-}
+# include device confs
+
+include ~/.config/i3/config.d/*.conf

@@ -6,7 +6,6 @@
 
 !gtk-3.0
 !i3
-!i3status
 !img
 !nixos
 !scripts
@@ -14,3 +13,4 @@
 nixos/device-conf.nix
 nixos/hardware-configuration.nix
 nixos/variables.nix
+i3/config.d/*.conf
