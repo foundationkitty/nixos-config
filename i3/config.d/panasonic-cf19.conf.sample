@@ -1,0 +1,5 @@
+# front panel buttons
+
+bindcode 147 exec --no-startup-id onboard
+bindcode 159 exec --no-startup-id python ~/.config/scripts/cf-19-rotate.py
+bindcode 160 exec systemctl suspend
