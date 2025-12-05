@@ -13,4 +13,4 @@
 nixos/device-conf.nix
 nixos/hardware-configuration.nix
 nixos/variables.nix
-i3/config.d/*.conf
+i3/config.d/device.conf

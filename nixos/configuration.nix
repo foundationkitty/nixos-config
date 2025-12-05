@@ -3,9 +3,6 @@
 # Variables
 let
 
-    sources = import ./nix/sources.nix;
-    lanzaboote = import sources.lanzaboote;
-
     unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
     {
       config = config.nixpkgs.config;
@@ -24,18 +21,9 @@ in
       ./device-conf.nix
       ./hardware-configuration.nix
       ./variables.nix
-      lanzaboote.nixosModules.lanzaboote
     ];
 
-  # Bootloader
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = config.bootLoaderTimeout;
-
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/etc/secureboot";
-  };
+  # Swap
 
   swapDevices = [ {
     device = "/var/lib/swapfile";

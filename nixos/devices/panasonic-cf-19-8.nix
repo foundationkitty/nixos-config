@@ -1,17 +1,38 @@
 { config, pkgs, lib, ... }:
 
 # Variables
+
 let
+
+    sources = import ./nix/sources.nix;
+    lanzaboote = import sources.lanzaboote;
 
     panasonic-hbtn = config.boot.kernelPackages.callPackage ./pkgs/panasonic-hbtn.nix { };
 
 in
 {
 
+  # Imports
+ 
+  imports =
+    [
+      lanzaboote.nixosModules.lanzaboote
+    ];
+
   # Front Button Drivers
 
   boot.extraModulePackages = [ panasonic-hbtn ];
   boot.kernelModules = [ "panasonic-hbtn" ];
+
+  # Bootloader
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = config.bootLoaderTimeout;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
 
   # Use Manually Specified Location
 

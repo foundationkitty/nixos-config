@@ -164,4 +164,4 @@ bindsym $mod+r mode "resize"
 
 # include device confs
 
-include ~/.config/i3/config.d/*.conf
+include ~/.config/i3/config.d/device.conf
