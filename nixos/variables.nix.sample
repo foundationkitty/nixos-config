@@ -3,6 +3,11 @@
 {
   options = {
 
+        bootDevice = lib.mkOption {
+            type = lib.types.str;
+            default = "/dev/sda";
+        };
+
         bootLoaderTimeout = lib.mkOption {
             type = lib.types.int;
             default = 5;

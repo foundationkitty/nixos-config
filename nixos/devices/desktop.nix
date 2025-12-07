@@ -2,6 +2,14 @@
 
 {
 
+  # Bootloader
+
+  boot.loader.grub = {
+    device = config.bootDevice;
+    enable = true;
+    enableCryptodisk = true;
+  };
+
   # Use Manually Specified Location
 
   location.provider = "manual";

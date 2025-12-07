@@ -4,9 +4,6 @@
 # Set Win key as Modifier
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar.
-font pango:monospace 8
-
 # start blueman-applet
 exec --no-startup-id blueman-applet
 
@@ -49,9 +46,6 @@ floating_modifier $mod
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
-
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -fg white -bg black
 
 # kill focused window
 bindsym $mod+Shift+q kill

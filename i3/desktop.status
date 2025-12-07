@@ -46,9 +46,3 @@ memory {
 tztime local {
         format = "%m-%d-%Y %I:%M%p"
 }
-
-read_file brightness {
-        format = "%content 🔆"
-        format_bad = "???? 🔆"
-        path = "~/.brightness"
-}
