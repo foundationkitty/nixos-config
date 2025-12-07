@@ -119,6 +119,7 @@ in
       hunspellDicts.en_US
       libreoffice
       kdePackages.kdenlive
+      proton-pass
       protonvpn-gui
       qbittorrent
       ticktick
