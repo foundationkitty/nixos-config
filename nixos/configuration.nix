@@ -117,6 +117,8 @@ in
     # Applications
       calibre
       discord
+      flameshot
+      gpxsee
       hunspell
       hunspellDicts.en_US
       libreoffice

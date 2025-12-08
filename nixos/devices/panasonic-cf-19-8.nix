@@ -70,21 +70,22 @@ in
 
         brightnessctl
         dmenu
-        flameshot
-        foxtrotgps
-        gpsd
-        gpxsee
-        jellyfin
-        onboard
         i3status
         lxappearance
-        modem-manager-gui
         volumeicon
         xss-lock
 
      ];
     };
   };
+
+  users.users.${config.user}.packages = with pkgs; [
+      foxtrotgps
+      jellyfin
+      gpsd
+      modem-manager-gui
+      onboard
+  ];
 
   programs.i3lock.enable = true;
 

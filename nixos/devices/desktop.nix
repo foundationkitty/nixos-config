@@ -49,9 +49,6 @@
 
         brightnessctl
         dmenu
-        flameshot
-        gpxsee
-        onboard
         i3status
         lxappearance
         volumeicon
@@ -60,6 +57,11 @@
      ];
     };
   };
+
+  users.users.${config.user}.packages = with pkgs; [
+    handbrake
+    makemkv
+  ];
 
   programs.i3lock.enable = true;
 
