@@ -105,6 +105,8 @@ in
   programs.nm-applet.enable = true;
   programs.steam.enable = true;
 
+  hardware.xpadneo.enable = true;
+
   # User
   users.users.${config.user} = {
     isNormalUser = true;
@@ -145,6 +147,7 @@ in
       signal-desktop
       tree
       unzip
+      usbutils
       virtualenv
       wireguard-tools
       xxd
