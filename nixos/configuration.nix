@@ -134,9 +134,9 @@ in
       git-credential-manager
       imagemagick
       jq
+      lon
       mlt
       ncdu
-      niv
       openresolv
       p7zip
       python3
