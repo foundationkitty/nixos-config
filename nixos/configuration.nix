@@ -74,6 +74,7 @@ in
 
   # Printing
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplip ];
 
   # Locales
   time.timeZone = config.timezone;
@@ -115,12 +116,14 @@ in
     packages = with pkgs; [ # Non-Module Packages
 
     # Applications
+      amberol
       calibre
       discord
       flameshot
       gpxsee
       hunspell
       hunspellDicts.en_US
+      ledfx
       libreoffice
       kdePackages.kdenlive
       proton-pass

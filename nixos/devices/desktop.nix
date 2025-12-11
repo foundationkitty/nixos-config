@@ -10,7 +10,7 @@
     enableCryptodisk = true;
   };
 
-    # Graphics
+  # Graphics
 
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
@@ -22,6 +22,17 @@
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  # VR
+
+  services.monado.enable = true;
+
+  programs.steam.package = pkgs.steam.override {
+    extraProfile = ''
+      unset TZ
+      export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
+    '';
   };
 
   # Use Manually Specified Location
