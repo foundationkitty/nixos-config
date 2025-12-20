@@ -137,6 +137,7 @@ in
       alsa-utils
       appimage-run
       corepack
+      dislocker
       file
       git-credential-manager
       imagemagick

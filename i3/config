@@ -13,7 +13,7 @@ exec --no-startup-id blueman-applet
 
 # protonvpn
 
-exec --no-startup-id protonvpn-app
+# exec --no-startup-id protonvpn-app
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
