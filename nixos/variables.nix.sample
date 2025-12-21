@@ -28,6 +28,16 @@
             default = [ "-p" "-s" "4800" ];
         };
 
+       graphicsPCI =  lib.mkOption {
+            type = lib.types.str;
+            default = "10de:xxxx";
+        };
+
+       graphicsAudioPCI =  lib.mkOption {
+            type = lib.types.str;
+            default = "10de:xxxx";
+        };
+
         hostname = lib.mkOption {
             type = lib.types.str;
             default = "myhostname";

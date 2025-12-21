@@ -2,6 +2,11 @@
 
 {
 
+  imports =
+    [
+      ./devices/desktop-virt.nix
+    ];
+
   # Bootloader
 
   boot.loader.grub = {
@@ -10,10 +15,20 @@
     enableCryptodisk = true;
   };
 
+  specialisation."VFIO".configuration = {
+    system.nixos.tags = [ "with-vfio" ];
+    hardware.nvidia.open = lib.mkForce false;
+    hardware.nvidia.package = lib.mkForce config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    services.xserver.displayManager.startx.enable = true;
+    vfio.enable = true;
+  };
+
   # Graphics
 
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
+
+  nixpkgs.config.nvidia.acceptLicense = true;
 
   hardware.nvidia = {
     modesetting.enable = true;

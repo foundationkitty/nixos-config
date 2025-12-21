@@ -146,6 +146,7 @@ in
       mlt
       ncdu
       openresolv
+      pciutils
       p7zip
       python3
       rclone
