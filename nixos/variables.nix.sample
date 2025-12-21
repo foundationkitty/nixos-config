@@ -3,39 +3,17 @@
 {
   options = {
 
-        bootDevice = lib.mkOption {
-            type = lib.types.str;
-            default = "/dev/sda";
-        };
+        # General
 
         bootLoaderTimeout = lib.mkOption {
             type = lib.types.int;
             default = 5;
         };
 
+
         fullUser = lib.mkOption {
             type = lib.types.str;
             default = "User";
-        };
-
-        gps-device = lib.mkOption {
-            type = lib.types.str;
-            default = "/dev/ttyS2";
-        };
-
-       gps-device-args =  lib.mkOption {
-            type = lib.types.listOf(lib.types.str);
-            default = [ "-p" "-s" "4800" ];
-        };
-
-       graphicsPCI =  lib.mkOption {
-            type = lib.types.str;
-            default = "10de:xxxx";
-        };
-
-       graphicsAudioPCI =  lib.mkOption {
-            type = lib.types.str;
-            default = "10de:xxxx";
         };
 
         hostname = lib.mkOption {
@@ -76,6 +54,27 @@
         user = lib.mkOption {
             type = lib.types.str;
             default = "user";
+        };
+
+
+        # Desktop
+
+        bootDevice = lib.mkOption {
+            type = lib.types.str;
+            default = "/dev/sda";
+        };
+
+
+        # Mobile
+
+        gps-device = lib.mkOption {
+            type = lib.types.str;
+            default = "/dev/ttyS2";
+        };
+
+        gps-device-args =  lib.mkOption {
+            type = lib.types.listOf(lib.types.str);
+            default = [ "-p" "-s" "4800" ];
         };
 
   };

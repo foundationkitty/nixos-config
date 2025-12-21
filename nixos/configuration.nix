@@ -41,6 +41,10 @@ in
     };
   };
 
+  # Time Compatibility
+
+  time.hardwareClockInLocalTime = true;
+
   # Fonts
   fonts.packages = with pkgs; [
       corefonts
