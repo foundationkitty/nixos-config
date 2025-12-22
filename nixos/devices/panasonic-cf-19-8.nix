@@ -5,7 +5,7 @@
 let
 
     sources = import ./lon.nix;
-    lanzaboote = import sources.lanzaboote;
+    lanzaboote = import sources.lanzaboote { };
 
     panasonic-hbtn = config.boot.kernelPackages.callPackage ./pkgs/panasonic-hbtn.nix { };
 

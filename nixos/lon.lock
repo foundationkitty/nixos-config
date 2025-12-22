@@ -8,9 +8,9 @@
       "owner": "nix-community",
       "repo": "lanzaboote",
       "branch": "master",
-      "revision": "v0.4.3",
-      "url": "https://github.com/nix-community/lanzaboote/archive/v0.4.3.tar.gz",
-      "hash": "sha256-If6vQ+KvtKs3ARBO9G3l+4wFSCYtRBrwX1z+I+B61wQ="
+      "revision": "v1.0.0",
+      "url": "https://github.com/nix-community/lanzaboote/archive/v1.0.0.tar.gz",
+      "hash": "sha256-RJmgVDzjRI18BWVogG6wpsl1UCuV6ui8qr4DJ1LfWZ8="
     }
   }
 }
