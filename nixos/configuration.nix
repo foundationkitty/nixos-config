@@ -41,10 +41,6 @@ in
     };
   };
 
-  # Time Compatibility
-
-  time.hardwareClockInLocalTime = true;
-
   # Fonts
   fonts.packages = with pkgs; [
       corefonts
@@ -169,6 +165,7 @@ in
       melonDS
       openrct2
       prismlauncher
+      unstable.zelda64recomp
       (retroarch.withCores (cores: with cores; [
         easyrpg
         fceumm
