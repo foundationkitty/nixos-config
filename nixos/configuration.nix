@@ -105,6 +105,7 @@ in
   programs.nix-ld.enable = true;
   programs.nm-applet.enable = true;
   programs.steam.enable = true;
+  programs.steam.protontricks.enable = true;
 
   hardware.xpadneo.enable = true;
 
@@ -140,6 +141,7 @@ in
       dislocker
       file
       git-credential-manager
+      icu.dev
       imagemagick
       jq
       lon
@@ -156,6 +158,7 @@ in
       unzip
       usbutils
       virtualenv
+      wine
       wireguard-tools
       xxd
 

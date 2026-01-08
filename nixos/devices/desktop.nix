@@ -62,7 +62,10 @@
   users.users.${config.user}.packages = with pkgs; [
     handbrake
     makemkv
+    weston
   ];
+
+  virtualisation.waydroid.enable = true;
 
   programs.i3lock.enable = true;
 
