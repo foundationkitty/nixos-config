@@ -1,5 +1,14 @@
 { config, pkgs, lib, ... }:
 
+let
+
+    unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
+    {
+      config = config.nixpkgs.config;
+    };
+
+in
+
 {
 
   # Bootloader
@@ -63,7 +72,10 @@
     handbrake
     makemkv
     weston
+    unstable.zelda64recomp
   ];
+
+  # Android
 
   virtualisation.waydroid.enable = true;
 

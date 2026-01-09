@@ -168,7 +168,6 @@ in
       melonDS
       openrct2
       prismlauncher
-      unstable.zelda64recomp
       (retroarch.withCores (cores: with cores; [
         easyrpg
         fceumm
