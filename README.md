@@ -12,7 +12,7 @@ Copy `nixos/devices/<device-model>.nix` to `nixos/device-conf.nix`
 
 Copy `nixos/variables.nix.sample` to `nixos/variables.nix` and fill it in with your information
 
-Copy `i3/config.d/<device-model>.conf` to `i3/config.d/device.conf`
+Copy `i3/config.d/<device-model>.conf` to `i3/config`
 
 A file located at `~/.background-image` will be loaded as the desktop and lockscreen background, it must be in PNG format and should have a resolution matching the target device.
 
