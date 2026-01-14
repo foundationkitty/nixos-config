@@ -12,9 +12,6 @@ let
     sources = import ./lon.nix;
     lanzaboote = import sources.lanzaboote { };
     
-    ../../common/cpu/intel
-    ../../common/pc/laptop
-
 in
 {
 
@@ -24,10 +21,6 @@ in
     [
       lanzaboote.nixosModules.lanzaboote
     ];
-
-      imports = [
-
-  ];
 
   # Laptop can't correctly suspend if wlan is active
   powerManagement = {
@@ -69,10 +62,10 @@ in
 
         sync.enable = true;
         
-        nvidiaBusId = "PCI:14:0:0";
+        nvidiaBusId = "PCI:1:0:0";
         intelBusId = "PCI:0:2:0";
 
-    }
+    };
 
   };
 
