@@ -140,6 +140,7 @@ in
       corepack
       dislocker
       file
+      gamescope
       git-credential-manager
       icu.dev
       imagemagick
@@ -153,6 +154,7 @@ in
       python3
       rclone
       sbctl
+      sgdboop
       signal-desktop
       tree
       unzip
