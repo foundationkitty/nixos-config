@@ -128,7 +128,7 @@ in
       libreoffice
       jellyfin-rpc
       kdePackages.kdenlive
-      kdePackates.okular
+      kdePackages.okular
       proton-pass
       protonvpn-gui
       qbittorrent
