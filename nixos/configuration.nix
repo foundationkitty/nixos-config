@@ -118,7 +118,7 @@ in
 
     # Applications
       amberol
-      calibre
+      unstable.calibre
       discord
       flameshot
       gpxsee
@@ -126,11 +126,13 @@ in
       hunspellDicts.en_US
       ledfx
       libreoffice
+      jellyfin-rpc
       kdePackages.kdenlive
+      kdePackates.okular
       proton-pass
       protonvpn-gui
       qbittorrent
-      ticktick
+      unstable.ticktick
       vesktop
       vscodium
 
