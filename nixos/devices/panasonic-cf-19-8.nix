@@ -12,6 +12,8 @@ let
 in
 {
 
+  services.cloudflare-warp.enable = true;
+
   # Imports
  
   imports =
