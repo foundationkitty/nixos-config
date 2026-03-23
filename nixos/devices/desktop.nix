@@ -68,8 +68,18 @@ in
     };
   };
 
+  # Appimage Libs
+
+  programs.appimage.package = pkgs.appimage-run.override { extraPkgs = pkgs: [
+    pkgs.zstd
+    pkgs.libxcb-cursor
+    pkgs.icu
+  ]; };
+
+  services.flatpak.enable = true;
+
   users.users.${config.user}.packages = with pkgs; [
-    handbrake
+    filebot
     makemkv
     weston
     unstable.zelda64recomp

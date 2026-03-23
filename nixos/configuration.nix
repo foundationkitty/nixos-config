@@ -98,16 +98,30 @@ in
   services.displayManager.autoLogin.user = config.user;
 
   # Modules
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
   programs.dconf.enable = true;
   programs.firefox.enable = true;
   programs.git.enable = true;
   programs.htop.enable = true;
   programs.nix-ld.enable = true;
   programs.nm-applet.enable = true;
+  programs.thunar.enable = true;
+
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
+  programs.steam.protontricks.package = unstable.protontricks;
 
   hardware.xpadneo.enable = true;
+
+  xdg.portal.enable = true;
+  xdg.portal.config.common.default = "gtk";
+  xdg.portal.extraPortals = with pkgs;[
+     xdg-desktop-portal-gtk
+  ];
 
   # User
   users.users.${config.user} = {
@@ -138,7 +152,6 @@ in
 
     # Tools
       alsa-utils
-      appimage-run
       corepack
       dislocker
       file
