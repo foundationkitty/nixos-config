@@ -148,6 +148,7 @@ in
       qbittorrent
       unstable.ticktick
       vesktop
+      vlc
       vscodium
 
     # Tools
