@@ -55,6 +55,10 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  services.udev.extraRules = ''
+    SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0306", TAG+="uaccess", MODE="0666"
+  '';
+
   services.resolved.enable = true;
 
   services.mullvad-vpn.enable = true;
@@ -146,6 +150,7 @@ in
       proton-pass
       protonvpn-gui
       qbittorrent
+      steam-rom-manager
       unstable.ticktick
       vesktop
       vlc
@@ -172,6 +177,7 @@ in
       sbctl
       sgdboop
       signal-desktop
+      sshfs
       tree
       unzip
       usbutils
@@ -181,6 +187,8 @@ in
       xxd
 
     # Games
+      cdecrypt
+      cemu
       unstable.dolphin-emu
       gzdoom
       melonDS

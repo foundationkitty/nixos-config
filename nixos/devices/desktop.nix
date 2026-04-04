@@ -68,6 +68,12 @@ in
     };
   };
 
+  # Docker
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings.features.cdi = true;
+  hardware.nvidia-container-toolkit.enable = true;
+
   # Appimage Libs
 
   programs.appimage.package = pkgs.appimage-run.override { extraPkgs = pkgs: [
@@ -77,6 +83,10 @@ in
   ]; };
 
   services.flatpak.enable = true;
+  services.jackett.enable = true;
+  services.jackett.package = unstable.jackett;
+
+  services.openssh.enable = true;
 
   users.users.${config.user}.packages = with pkgs; [
     filebot
