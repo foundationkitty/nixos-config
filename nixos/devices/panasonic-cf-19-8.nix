@@ -47,6 +47,8 @@ in
     enable = true;
     devices = [ config.gps-device ];
     extraArgs = config.gps-device-args;
+    nowait = true;
+    readonly = false;
   };
 
   users.users.gpsd = {
@@ -83,8 +85,8 @@ in
 
   users.users.${config.user}.packages = with pkgs; [
       foxtrotgps
-      jellyfin
       gpsd
+      jellyfin
       modem-manager-gui
       onboard
   ];

@@ -74,7 +74,7 @@
 
         gps-device-args =  lib.mkOption {
             type = lib.types.listOf(lib.types.str);
-            default = [ "-p" "-s" "4800" ];
+            default = [ "-s" "4800" ];
         };
 
   };
