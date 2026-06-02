@@ -62,7 +62,6 @@ in
   services.resolved.enable = true;
 
   services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = unstable.mullvad-vpn;
 
   # Sound
   services.pulseaudio.enable = false;
@@ -117,7 +116,6 @@ in
 
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
-  programs.steam.protontricks.package = unstable.protontricks;
 
   hardware.xpadneo.enable = true;
 
@@ -136,7 +134,7 @@ in
 
     # Applications
       amberol
-      unstable.calibre
+      calibre
       discord
       flameshot
       gpxsee
@@ -148,10 +146,10 @@ in
       kdePackages.kdenlive
       kdePackages.okular
       proton-pass
-      protonvpn-gui
+      proton-vpn
       qbittorrent
       steam-rom-manager
-      unstable.ticktick
+      ticktick
       vesktop
       vlc
       vscodium
@@ -189,9 +187,9 @@ in
     # Games
       cdecrypt
       cemu
-      unstable.dolphin-emu
+      dolphin-emu
       gzdoom
-      melonDS
+      melonds
       openrct2
       prismlauncher
       (retroarch.withCores (cores: with cores; [

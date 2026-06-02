@@ -26,6 +26,11 @@ in
   boot.extraModulePackages = [ panasonic-hbtn ];
   boot.kernelModules = [ "panasonic-hbtn" ];
 
+  # WiFi Drivers
+
+  hardware.enableAllFirmware = true;
+  hardware.firmware = with pkgs; [ linux-firmware ];
+
   # Bootloader
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
