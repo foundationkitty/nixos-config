@@ -12,5 +12,6 @@
 
 nixos/device-conf.nix
 nixos/hardware-configuration.nix
+nixos/tmp
 nixos/variables.nix
 i3/config

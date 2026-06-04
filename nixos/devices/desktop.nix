@@ -92,7 +92,6 @@ in
     filebot
     makemkv
     weston
-    unstable.zelda64recomp
   ];
 
   # Android
