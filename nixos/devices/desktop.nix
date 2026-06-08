@@ -86,15 +86,16 @@ in
   services.openssh.enable = true;
 
   users.users.${config.user}.packages = with pkgs; [
+    brightnessctl
     i3status
     filebot
+    lxappearance
     makemkv
+    wofi
  ];
 
   # Android
 
-  networking.nftables.enable = false;
-  networking.firewall.package = pkgs.iptables-legacy;
   virtualisation.waydroid.enable = true;
   virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
