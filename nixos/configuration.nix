@@ -33,14 +33,6 @@ in
   # Graphics
   hardware.graphics.enable32Bit = true;
 
-  services.redshift = {
-    enable = true;
-    temperature = {
-      day = 5500;
-      night = 3700;
-    };
-  };
-
   # Fonts
   fonts.packages = with pkgs; [
       corefonts
@@ -119,11 +111,20 @@ in
 
   hardware.xpadneo.enable = true;
 
-  xdg.portal.enable = true;
-  xdg.portal.config.common.default = "gtk";
-  xdg.portal.extraPortals = with pkgs;[
-     xdg-desktop-portal-gtk
-  ];
+  xdg.portal = {
+    enable = true;
+    wlr = {
+      enable = true;
+      settings.screencast = {
+        max_fps = 30;
+        chooser_type = "simple";
+        chooser_cmd = "cat /home/basil/displays | /run/current-system/sw/bin/wmenu";
+      };
+    };
+    extraPortals = with pkgs;[
+      xdg-desktop-portal-gtk
+    ];
+  };
 
   # User
   users.users.${config.user} = {
@@ -148,6 +149,7 @@ in
       proton-pass
       proton-vpn
       qbittorrent
+      signal-desktop
       steam-rom-manager
       ticktick
       vesktop
@@ -174,7 +176,7 @@ in
       rclone
       sbctl
       sgdboop
-      signal-desktop
+      slurp
       sshfs
       tree
       unzip
@@ -182,6 +184,7 @@ in
       virtualenv
       wine
       wireguard-tools
+      wlsunset
       xxd
 
     # Games

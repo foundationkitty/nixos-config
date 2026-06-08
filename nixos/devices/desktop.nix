@@ -32,7 +32,11 @@ in
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+
   };
+
+  hardware.enableAllFirmware = true;
+  hardware.firmware = with pkgs; [ linux-firmware ];
 
   # Use Manually Specified Location
 
@@ -40,31 +44,24 @@ in
   location.latitude = config.lat;
   location.longitude = config.long;
 
-  # Desktop Config
+  # WM
 
-    services.xserver = {
+  services.gnome.gnome-keyring.enable = true;
+
+  programs.sway = {
+    package = unstable.sway;
     enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
+    wrapperFeatures.gtk = true;
+  };
 
-    desktopManager = {
-      xterm.enable = false;
-    };
-
-    displayManager.lightdm.enable = true;
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-
-        brightnessctl
-        dmenu
-        i3status
-        lxappearance
-        volumeicon
-        xss-lock
-
-     ];
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "sway --unsupported-gpu";
+        user = "${config.user}";
+      };
+      default_session = initial_session;
     };
   };
 
@@ -89,15 +86,16 @@ in
   services.openssh.enable = true;
 
   users.users.${config.user}.packages = with pkgs; [
+    i3status
     filebot
     makemkv
-    weston
-  ];
+ ];
 
   # Android
 
+  networking.nftables.enable = false;
+  networking.firewall.package = pkgs.iptables-legacy;
   virtualisation.waydroid.enable = true;
-
-  programs.i3lock.enable = true;
+  virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
 }
