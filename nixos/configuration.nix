@@ -113,6 +113,7 @@ in
 
   xdg.portal = {
     enable = true;
+    config.common.default = "gtk";
     wlr = {
       enable = true;
       settings.screencast = {
@@ -184,6 +185,7 @@ in
       virtualenv
       wine
       wireguard-tools
+      wl-clipboard
       wlsunset
       xxd
 

@@ -60,40 +60,35 @@ in
     extraGroups = [ "dialout" ];
   };
 
-  # Desktop Config
+  # WM
 
-    services.xserver = {
+  services.gnome.gnome-keyring.enable = true;
+
+  programs.sway = {
     enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
+    wrapperFeatures.gtk = true;
+  };
 
-    desktopManager = {
-      xterm.enable = false;
-    };
-
-    displayManager.lightdm.enable = true;
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-
-        brightnessctl
-        dmenu
-        i3status
-        lxappearance
-        volumeicon
-        xss-lock
-
-     ];
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "sway --unsupported-gpu";
+        user = "${config.user}";
+      };
+      default_session = initial_session;
     };
   };
 
   users.users.${config.user}.packages = with pkgs; [
+      brightnessctl
       foxtrotgps
       gpsd
+      i3status
       jellyfin
+      lxappearance
       modem-manager-gui
-      onboard
+      wvkbd
   ];
 
   programs.i3lock.enable = true;

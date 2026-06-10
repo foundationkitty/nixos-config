@@ -20,6 +20,7 @@ order += "load"
 order += "memory"
 order += "read_file brightness"
 order += "tztime local"
+order += "volume master"
 
 wireless wwan0 {
         format_up = "M: (%ip)"
@@ -63,4 +64,11 @@ read_file brightness {
         format = "%content 🔆"
         format_bad = "???? 🔆"
         path = "~/.brightness"
+}
+
+volume master {
+        format = "🔊%volume"
+        format_muted = "🔇0%"
+        device = "default"
+        mixer = "Master"
 }
