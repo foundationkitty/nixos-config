@@ -18,6 +18,7 @@ order += "load"
 order += "memory"
 order += "read_file brightness"
 order += "tztime local"
+order += "volume master"
 
 wireless _first_ {
         format_up = "W: %essid%quality"
@@ -46,3 +47,11 @@ memory {
 tztime local {
         format = "%m-%d-%Y %I:%M%p"
 }
+
+volume master {
+        format = "🔊%volume"
+        format_muted = "🔇0%"
+        device = "default"
+        mixer = "Master"
+}
+
