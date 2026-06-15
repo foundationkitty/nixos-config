@@ -137,6 +137,7 @@ in
     # Applications
       amberol
       calibre
+      dconf-editor
       discord
       flameshot
       gpxsee
@@ -193,6 +194,7 @@ in
       cdecrypt
       cemu
       dolphin-emu
+      dusklight
       gzdoom
       melonds
       openrct2
