@@ -63,8 +63,7 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
   };
 
   # Printing
@@ -105,6 +104,7 @@ in
 
   services.gvfs.enable = true;
   services.tumbler.enable = true;
+  services.usbmuxd.enable = true;
 
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
@@ -118,8 +118,8 @@ in
       enable = true;
       settings.screencast = {
         max_fps = 30;
-        chooser_type = "simple";
-        chooser_cmd = "cat /home/basil/displays | /run/current-system/sw/bin/wmenu";
+        chooser_type = "dmenu";
+        chooser_cmd = "${pkgs.bemenu}/bin/bemenu";
       };
     };
     extraPortals = with pkgs;[
@@ -145,6 +145,7 @@ in
       hunspellDicts.en_US
       ledfx
       libreoffice
+      unstable.iloader
       jellyfin-rpc
       kdePackages.kdenlive
       kdePackages.okular
@@ -160,16 +161,27 @@ in
 
     # Tools
       alsa-utils
+      bemenu
       corepack
       dislocker
+      dxvk
       file
+      ffmpeg-full
       gamescope
       git-credential-manager
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-ugly
+      gst_all_1.gst-libav
       icu.dev
       imagemagick
       jq
+      libimobiledevice
       lon
       mlt
+      msitools
       ncdu
       openresolv
       pciutils
@@ -184,11 +196,14 @@ in
       unzip
       usbutils
       virtualenv
-      wine
+      wget
+      wineWow64Packages.stagingFull
+      winetricks
       wireguard-tools
       wl-clipboard
       wlsunset
       xxd
+      zenity
 
     # Games
       cdecrypt
