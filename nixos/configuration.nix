@@ -52,7 +52,6 @@ in
   '';
 
   services.resolved.enable = true;
-
   services.mullvad-vpn.enable = true;
 
   # Sound
@@ -139,7 +138,7 @@ in
       calibre
       dconf-editor
       discord
-      flameshot
+      unstable.flameshot
       gpxsee
       hunspell
       hunspellDicts.en_US
@@ -169,6 +168,7 @@ in
       ffmpeg-full
       gamescope
       git-credential-manager
+      grim
       gst_all_1.gstreamer
       gst_all_1.gst-plugins-base
       gst_all_1.gst-plugins-good
