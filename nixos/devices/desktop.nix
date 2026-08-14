@@ -20,6 +20,30 @@ in
     useOSProber = true;
   };
 
+  # Secondary storage
+
+  boot.supportedFilesystems = [ "ntfs" ];
+  systemd.tmpfiles.rules = [
+    "d /etc/bitlocker 0700 root root -"
+  ];
+
+  environment.etc.crypttab.text = ''
+    storage      UUID=${config.storageuuid}    /etc/bitlocker/storage.key  bitlk,nofail
+  '';
+
+   fileSystems."/mnt/storage" = {
+    device = "/dev/mapper/storage";
+    fsType = "ntfs3";
+    options = [
+      "rw"
+      "uid=1000"
+      "gid=100"
+      "umask=007"
+      "nofail"
+      "force"
+    ];
+  };
+
   # Graphics
 
   hardware.graphics.enable = true;

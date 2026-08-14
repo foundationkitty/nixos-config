@@ -64,6 +64,10 @@
             default = "/dev/sda";
         };
 
+        storageuuid = lib.mkOption {
+            type = lib.types.str;
+            default = "youruuid";
+        };
 
         # Mobile
 
