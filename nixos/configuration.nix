@@ -189,7 +189,7 @@ in
       python3
       rclone
       sbctl
-      sgdboop
+      unstable.sgdboop
       slurp
       sshfs
       tree
