@@ -202,6 +202,7 @@ in
       rclone
       sbctl
       unstable.sgdboop
+      socat
       slurp
       sshfs
       tree
