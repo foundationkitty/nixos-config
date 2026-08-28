@@ -93,4 +93,9 @@ in
 
   programs.i3lock.enable = true;
 
+  # Android
+
+  virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.package = pkgs.waydroid-nftables;
+
 }

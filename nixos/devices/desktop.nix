@@ -11,6 +11,10 @@ in
 
 {
 
+  imports = [
+    ./pkgs/waydroid-nv.nix
+  ];
+
   # Bootloader
 
   boot.loader.grub = {
@@ -117,10 +121,5 @@ in
     makemkv
     wofi
  ];
-
-  # Android
-
-  virtualisation.waydroid.enable = true;
-  virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
 }

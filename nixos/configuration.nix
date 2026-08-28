@@ -8,10 +8,15 @@ let
       config = config.nixpkgs.config;
     };
 
-    #myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
-    #{
-    #  config = config.nixpkgs.config;
-    #};
+    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
+    {
+      config = config.nixpkgs.config;
+    };
+
+    pinball = import (builtins.fetchTarball https://github.com/nmoya/nixpkgs/tarball/vpinball)
+    {
+      config = config.nixpkgs.config;
+    };
 
 in
 {
@@ -47,8 +52,13 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  hardware.uinput.enable = true;
+
   services.udev.extraRules = ''
     SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0306", TAG+="uaccess", MODE="0666"
+    KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0660", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0660", TAG+="uaccess"
   '';
 
   services.resolved.enable = true;
@@ -130,7 +140,7 @@ in
   users.users.${config.user} = {
     isNormalUser = true;
     description = config.fullUser;
-    extraGroups = [ "gpsd" "networkmanager" "wheel" ];
+    extraGroups = [ "gpsd" "input" "networkmanager" "wheel" ];
     packages = with pkgs; [ # Non-Module Packages
 
     # Applications
@@ -153,7 +163,7 @@ in
       qbittorrent
       signal-desktop
       steam-rom-manager
-      ticktick
+      myfork.ticktick
       vesktop
       vlc
       vscodium
@@ -164,6 +174,7 @@ in
       corepack
       dislocker
       dxvk
+      evsieve
       file
       ffmpeg-full
       gamescope
@@ -179,6 +190,7 @@ in
       imagemagick
       jq
       libimobiledevice
+      libstrangle
       lon
       mlt
       msitools
@@ -186,7 +198,7 @@ in
       openresolv
       pciutils
       p7zip
-      python3
+      (python3.withPackages (ps: [ ps.evdev]))
       rclone
       sbctl
       unstable.sgdboop
@@ -221,6 +233,9 @@ in
         mupen64plus
         snes9x
       ]))
+      unnamed-sdvx-clone
+      pinball.vpinball
+      unstable.vpxtool
     ];
   };
 }
