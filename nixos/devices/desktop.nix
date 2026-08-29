@@ -24,6 +24,8 @@ in
     useOSProber = true;
   };
 
+  boot.kernelModules = [ "sg" ];
+
   # Secondary storage
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -116,7 +118,12 @@ in
   users.users.${config.user}.packages = with pkgs; [
     brightnessctl
     i3status
-    filebot
+    (filebot.overrideAttrs (old: {
+      src = pkgs.fetchurl {
+        url = "https://get.filebot.net/filebot/FileBot_${old.version}/FileBot_${old.version}-portable.tar.xz";
+        hash = "sha256-OcXXKaZcBuP584SJWeQB+aaxO0kih6Oiud0Vm8e9kPo=";
+      };
+    }))
     lxappearance
     makemkv
     wofi

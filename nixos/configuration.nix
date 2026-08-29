@@ -171,6 +171,7 @@ in
     # Tools
       alsa-utils
       bemenu
+      binutils
       corepack
       dislocker
       dxvk
