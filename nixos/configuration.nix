@@ -56,9 +56,8 @@ in
 
   services.udev.extraRules = ''
     SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0306", TAG+="uaccess", MODE="0666"
-    KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
-    KERNEL=="hidraw*", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0660", TAG+="uaccess"
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0660", TAG+="uaccess"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0666", GROUP="input"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0666", TAG+="uaccess"
   '';
 
   services.resolved.enable = true;
@@ -192,6 +191,7 @@ in
       jq
       libimobiledevice
       libstrangle
+      libusb1
       lon
       mlt
       msitools
@@ -199,7 +199,7 @@ in
       openresolv
       pciutils
       p7zip
-      (python3.withPackages (ps: [ ps.evdev]))
+      (python3.withPackages (ps: [ ps.evdev ps.pyusb ps.pypresence]))
       rclone
       sbctl
       unstable.sgdboop
@@ -211,7 +211,7 @@ in
       usbutils
       virtualenv
       wget
-      wineWow64Packages.stagingFull
+      unstable.wineWow64Packages.stagingFull
       winetricks
       wireguard-tools
       wl-clipboard
