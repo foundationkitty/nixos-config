@@ -69,18 +69,6 @@
             default = "youruuid";
         };
 
-        # Mobile
-
-        gps-device = lib.mkOption {
-            type = lib.types.str;
-            default = "/dev/ttyS2";
-        };
-
-        gps-device-args =  lib.mkOption {
-            type = lib.types.listOf(lib.types.str);
-            default = [ "-s" "4800" ];
-        };
-
   };
 }
 
