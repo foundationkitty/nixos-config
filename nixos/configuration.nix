@@ -60,6 +60,8 @@ in
     SUBSYSTEM=="usb", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0666", TAG+="uaccess"
   '';
 
+  hardware.flipperzero.enable = true;
+
   services.resolved.enable = true;
   services.mullvad-vpn.enable = true;
 
@@ -169,11 +171,13 @@ in
 
     # Tools
       alsa-utils
+      android-tools
       bemenu
       binutils
       corepack
       dislocker
       dxvk
+      e2fsprogs
       evsieve
       file
       ffmpeg-full
@@ -199,7 +203,7 @@ in
       openresolv
       pciutils
       p7zip
-      (python3.withPackages (ps: [ ps.evdev ps.pyusb ps.pypresence]))
+      (python3.withPackages (ps: [ ps.evdev ps.dbus-python ps.pygobject3 ps.pyusb ps.pypresence]))
       rclone
       sbctl
       unstable.sgdboop
