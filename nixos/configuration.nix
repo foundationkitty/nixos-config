@@ -8,10 +8,10 @@ let
       config = config.nixpkgs.config;
     };
 
-    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
-    {
-      config = config.nixpkgs.config;
-    };
+#    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
+#    {
+#      config = config.nixpkgs.config;
+#    };
 
     pinball = import (builtins.fetchTarball https://github.com/nmoya/nixpkgs/tarball/vpinball)
     {
@@ -42,6 +42,11 @@ in
   fonts.packages = with pkgs; [
       corefonts
       vista-fonts
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      ipafont
+      kochi-substitute
   ];
 
   # Networking
@@ -164,7 +169,7 @@ in
       qbittorrent
       signal-desktop
       steam-rom-manager
-      myfork.ticktick
+      ticktick
       vesktop
       vlc
       vscodium
@@ -183,7 +188,9 @@ in
       ffmpeg-full
       gamescope
       git-credential-manager
+      glib
       grim
+      gsettings-desktop-schemas
       gst_all_1.gstreamer
       gst_all_1.gst-plugins-base
       gst_all_1.gst-plugins-good

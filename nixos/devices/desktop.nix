@@ -2,6 +2,9 @@
 
 let
 
+    sources = import ./lon.nix;
+    lanzaboote = import sources.lanzaboote { };
+
     unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
     {
       config = config.nixpkgs.config;
@@ -13,18 +16,23 @@ in
 
   imports = [
     ./pkgs/waydroid-nv.nix
+    lanzaboote.nixosModules.lanzaboote
   ];
 
   # Bootloader
 
-  boot.loader.grub = {
-    device = config.bootDevice;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = config.bootLoaderTimeout;
+
+  boot.lanzaboote = {
     enable = true;
-    enableCryptodisk = true;
-    useOSProber = true;
+    pkiBundle = "/var/lib/sbctl";
   };
 
   boot.kernelModules = [ "sg" ];
+
+  boot.kernelParams = [ "usbcore.old_scheme_first=1" ];
 
   # Secondary storage
 
@@ -37,7 +45,7 @@ in
     storage      UUID=${config.storageuuid}    /etc/bitlocker/storage.key  bitlk,nofail
   '';
 
-   fileSystems."/mnt/storage" = {
+  fileSystems."/mnt/storage" = {
     device = "/dev/mapper/storage";
     fsType = "ntfs3";
     options = [
@@ -57,7 +65,7 @@ in
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
@@ -93,6 +101,13 @@ in
       };
       default_session = initial_session;
     };
+  };
+
+  # Ports
+
+  networking.firewall = {
+    allowedTCPPorts = [ 5700 ];
+    allowedUDPPorts = [ 5700 ];
   };
 
   # Docker
