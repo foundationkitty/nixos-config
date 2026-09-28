@@ -59,12 +59,12 @@
 
         # Desktop
 
-        bootDevice = lib.mkOption {
+        storageuuid = lib.mkOption {
             type = lib.types.str;
-            default = "/dev/sda";
+            default = "youruuid";
         };
 
-        storageuuid = lib.mkOption {
+        crucialuuid = lib.mkOption {
             type = lib.types.str;
             default = "youruuid";
         };

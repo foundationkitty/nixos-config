@@ -43,6 +43,7 @@ in
 
   environment.etc.crypttab.text = ''
     storage      UUID=${config.storageuuid}    /etc/bitlocker/storage.key  bitlk,nofail
+    crucial      UUID=${config.crucialuuid}    /root/secret.key  luks,nofail
   '';
 
   fileSystems."/mnt/storage" = {
@@ -55,6 +56,14 @@ in
       "umask=007"
       "nofail"
       "force"
+    ];
+  };
+
+  fileSystems."/mnt/crucial" = {
+    device = "/dev/mapper/crucial";
+    fsType = "ext4";
+    options = [
+      "nofail"
     ];
   };
 

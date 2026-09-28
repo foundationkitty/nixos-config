@@ -8,10 +8,10 @@ let
       config = config.nixpkgs.config;
     };
 
-#    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
-#    {
-#      config = config.nixpkgs.config;
-#    };
+    myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
+    {
+      config = config.nixpkgs.config;
+    };
 
     pinball = import (builtins.fetchTarball https://github.com/nmoya/nixpkgs/tarball/vpinball)
     {
@@ -234,9 +234,18 @@ in
       cdecrypt
       cemu
       dolphin-emu
-      dusklight
+      myfork.dusklight
       gzdoom
-      melonds
+      (melonds.overrideAttrs (old: {
+        pname = "melonDS-x432r-plus";
+        version = "0.2.2";
+        src = pkgs.fetchFromGitHub {
+          owner = "ZironZ";
+          repo = "melonDS-X432R-Plus";
+          rev = "v0.2.2";
+          hash = "sha256-7/tJuaN7+qa838fFP/vMPI7jkSsW6xsB0Hb+EXnghSY=";
+        };
+      }))
       openrct2
       prismlauncher
       (retroarch.withCores (cores: with cores; [
