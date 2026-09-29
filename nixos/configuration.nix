@@ -169,7 +169,7 @@ in
       qbittorrent
       signal-desktop
       unstable.steam-rom-manager
-      ticktick
+      myfork.ticktick
       vesktop
       vlc
       vscodium
