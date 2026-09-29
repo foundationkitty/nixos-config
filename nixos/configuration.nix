@@ -168,7 +168,7 @@ in
       proton-vpn
       qbittorrent
       signal-desktop
-      steam-rom-manager
+      unstable.steam-rom-manager
       ticktick
       vesktop
       vlc

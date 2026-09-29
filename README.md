@@ -1,6 +1,7 @@
 # foundationkitty's NixOS Config(s)
 ## .config files for my devices:
 ### - Panasonic Toughbook CF-19-8
+### - Dell Precision 5820 w/ RTX 3080 GPU
 
 ![screenshot of desktop](img/cf-19-desktop.png)
 
@@ -17,5 +18,3 @@ Copy `sway/config.d/<device-model>.conf` to `sway/config`
 A file located at `~/.background-image` will be loaded as the desktop and lockscreen background, it must be in PNG format and should have a resolution matching the target device.
 
 Don't forget to generate a `hardware-configuration.nix` with the `nixos-generate-config` command if necessary. 
-
-For screenshare create `displays` in your user directory with a line by line listing of your displays, obtainable with `swaymsg -t get-outputs``

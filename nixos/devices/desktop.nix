@@ -34,6 +34,8 @@ in
 
   boot.kernelParams = [ "usbcore.old_scheme_first=1" ];
 
+  hardware.rasdaemon.enable = true;
+
   # Secondary storage
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -74,12 +76,25 @@ in
 
   hardware.nvidia = {
     modesetting.enable = true;
+    nvidiaPersistenced = true;
     powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
+  };
+
+  systemd.services.gpu-undervolt = {
+    description = "Apply GPU undervolt";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.python3.withPackages (ps: [ ps.nvidia-ml-py ])}/bin/python3 /home/${config.user}/.config/scripts/uv.py 1815 150";
+      Environment = "LD_LIBRARY_PATH=/run/opengl-driver/lib";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
   };
 
   hardware.enableAllFirmware = true;
