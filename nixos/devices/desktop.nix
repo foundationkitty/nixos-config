@@ -10,6 +10,11 @@ let
       config = config.nixpkgs.config;
     };
 
+    mmv200 = import (builtins.fetchTarball https://github.com/yzhou216/nixpkgs/tarball/makemkv-bump)
+    {
+      config = config.nixpkgs.config;
+    };
+
 in
 
 {
@@ -32,7 +37,11 @@ in
 
   boot.kernelModules = [ "sg" ];
 
+  boot.lanzaboote.configurationLimit = 5;
+
   boot.kernelParams = [ "usbcore.old_scheme_first=1" ];
+
+  boot.consoleLogLevel = 3;
 
   hardware.rasdaemon.enable = true;
 
@@ -164,7 +173,7 @@ in
       };
     }))
     lxappearance
-    makemkv
+    mmv200.makemkv
     wofi
  ];
 
