@@ -210,14 +210,16 @@ in
       openresolv
       pciutils
       p7zip
-      (python3.withPackages (ps: [ ps.evdev ps.dbus-python ps.pygobject3 ps.pyusb ps.pypresence]))
+      (python3.withPackages (ps: [ ps.evdev ps.dbus-python ps.flask ps.pygobject3 ps.pyusb ps.pypresence ps.pyserial  ps.huggingface-hub ]))
       rclone
       sbctl
+      screen
       unstable.sgdboop
       socat
       slurp
       sshfs
       tree
+      unrar
       unzip
       usbutils
       virtualenv
