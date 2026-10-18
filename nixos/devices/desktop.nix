@@ -10,11 +10,6 @@ let
       config = config.nixpkgs.config;
     };
 
-    mmv200 = import (builtins.fetchTarball https://github.com/yzhou216/nixpkgs/tarball/makemkv-bump)
-    {
-      config = config.nixpkgs.config;
-    };
-
 in
 
 {
@@ -119,24 +114,6 @@ in
   location.latitude = config.lat;
   location.longitude = config.long;
 
-  # Local LLM
-
-  services.ollama = { enable = true; package = pkgs.ollama-cuda; };
-  services.ollama.host = "${config.localip}";
-
-  systemd.services.qwen-rvn = {
-    description = "qwen server";
-    serviceConfig = {
-      User = config.user;
-      ExecStart = "/etc/profiles/per-user/${config.user}/bin/llama-server"
-        + " -m /home/${config.user}/models/RVN-Q4_K_M-multilingual.gguf"
-        + " --mmproj /home/${config.user}/models/mmproj-Qwen3.8-27B-Q8_0.gguf"
-        + " --no-mmproj-offload -np 1"
-        + " -c 16384 -ngl 30 --host 0.0.0.0 --port 8080 --jinja";
-      Restart = "on-failure";
-    };
-  };
-
   # WM
 
   services.gnome.gnome-keyring.enable = true;
@@ -205,9 +182,8 @@ in
         hash = "sha256-OcXXKaZcBuP584SJWeQB+aaxO0kih6Oiud0Vm8e9kPo=";
       };
     }))
-    (llama-cpp.override { cudaSupport = true; })
     lxappearance
-    mmv200.makemkv
+    unstable.makemkv
     v4l-utils
     wofi
  ];

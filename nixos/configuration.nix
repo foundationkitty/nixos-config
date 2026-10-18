@@ -18,6 +18,8 @@ let
       config = config.nixpkgs.config;
     };
 
+    wine = unstable.wineWow64Packages.stagingFull;
+
 in
 {
   # Imports
@@ -210,6 +212,7 @@ in
       openresolv
       pciutils
       p7zip
+      poppler-utils
       (python3.withPackages (ps: [ ps.evdev ps.dbus-python ps.flask ps.pygobject3 ps.pyusb ps.pypresence ps.pyserial  ps.huggingface-hub ]))
       rclone
       sbctl
@@ -224,8 +227,12 @@ in
       usbutils
       virtualenv
       wget
-      unstable.wineWow64Packages.stagingFull
-      winetricks
+      wine
+      (unstable.winetricks.overrideAttrs (old: {
+        postInstall = old.postInstall + ''
+          wrapProgram $out/bin/winetricks --set-default WINE_BIN ${wine}/bin/.wine
+        '';
+      }))
       wireguard-tools
       wl-clipboard
       wlsunset

@@ -1,11 +1,11 @@
 import subprocess
 import os
 
-dispname = "DP-2"
+dispname = "DP-3"
 
 query_cmd = "swaymsg -t get_outputs"
 query = subprocess.check_output(query_cmd, shell=True, text=True)
-query = query.split("DP-2")[1]
+query = query.split("DP-3")[1]
 query = query.split("HDMI")[0]
 
 if '"transform": "normal"' in query:
