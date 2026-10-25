@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -uo pipefail
+here="${BASH_SOURCE[0]%/*}"
+SECTION="${1:-Sinks}"
+
+devices=$(wpctl status | awk -v sec="$SECTION" '
+  /^Audio/ {audio=1} /^Video/ {audio=0}
+  audio && $0 ~ ("─ " sec ":") {s=1; next}
+  s && /─ [A-Z][a-z]+:/ {s=0}
+  s && match($0, /[0-9]+\. /) {
+    mark = (substr($0, 1, RSTART) ~ /\*/) ? "● " : "   "
+    rest = substr($0, RSTART); sub(/ *\[vol:.*/, "", rest); print mark rest
+  }')
+[ -n "$devices" ] || exit 1
+
+[ "$SECTION" = Sources ] && prompt="Microphone" || prompt="Audio output"
+choice=$(printf '%s\n' "$devices" | "$here/pick-menu" "$prompt") || exit 0
+[ -n "$choice" ] || exit 0
+id=$(sed -E 's/^[^0-9]*([0-9]+)\..*/\1/' <<<"$choice")
+wpctl set-default "$id"

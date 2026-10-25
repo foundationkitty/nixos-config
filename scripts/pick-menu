@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+prompt="${1:-Select}"
+if command -v wofi >/dev/null; then
+  exec wofi --dmenu --insensitive --prompt "$prompt" --cache-file /dev/null
+elif command -v bemenu >/dev/null; then
+  exec bemenu -i -l 10 -p "$prompt"
+else
+  exec wmenu -i -l 10 -p "$prompt"
+fi

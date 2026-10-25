@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -uo pipefail
+here="${BASH_SOURCE[0]%/*}"
+mapfile -t labels
+[ "${#labels[@]}" -gt 0 ] || exit 1
+
+declare -A mode=(); focused=""
+if outs=$(swaymsg -t get_outputs -p 2>/dev/null); then
+  while read -r name m f; do
+    mode[$name]=$m; [ "$f" = 1 ] && focused=$name
+  done < <(awk '/^Output / { if (n) print n, m, f; n=$2; m="?"; f=($0 ~ /\(focused\)/) }
+                /Current mode:/ { m=$3 } END { if (n) print n, m, f }' <<<"$outs")
+fi
+
+menu=""
+for i in "${!labels[@]}"; do
+  label=${labels[$i]}; n=$((i + 1))
+  case $label in
+    "Monitor: "*) rest=${label#Monitor: }; out=${rest%% *}
+                  mark="   "; [ "$out" = "$focused" ] && mark="● "
+                  menu+="${mark}${n}. Screen  ${rest}${mode[$out]:+  [${mode[$out]}]}"$'\n' ;;
+    "Window: "*)  menu+="   ${n}. Window  ${label#Window: }"$'\n' ;;
+    *)            menu+="   ${n}. ${label}"$'\n' ;;
+  esac
+done
+
+choice=$(printf '%s' "$menu" | "$here/pick-menu" "Share") || exit 1
+n=$(sed -nE 's/^[^0-9]*([0-9]+)\..*/\1/p' <<<"$choice")
+[ -n "$n" ] && [ "$n" -ge 1 ] && [ "$n" -le "${#labels[@]}" ] || exit 1
+printf '%s\n' "${labels[$((n - 1))]}"
