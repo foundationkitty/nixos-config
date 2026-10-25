@@ -65,6 +65,8 @@ in
     SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0306", TAG+="uaccess", MODE="0666"
     KERNEL=="hidraw*", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0666", GROUP="input"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0666", TAG+="uaccess"
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="f822", ATTRS{idProduct}=="0148", GROUP="users", MODE="0660"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="f822", ATTRS{idProduct}=="0148", ENV{ID_MM_DEVICE_IGNORE}="1"
   '';
 
   hardware.flipperzero.enable = true;
@@ -113,6 +115,8 @@ in
   programs.appimage.binfmt = true;
   programs.dconf.enable = true;
   programs.firefox.enable = true;
+  programs.gamescope.enable = true;
+  programs.gamescope.capSysNice = true;
   programs.git.enable = true;
   programs.htop.enable = true;
   programs.nix-ld.enable = true;
@@ -125,6 +129,7 @@ in
 
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
+  programs.steam.extraPackages = [ pkgs.gamescope ];
 
   hardware.xpadneo.enable = true;
 
@@ -136,7 +141,7 @@ in
       settings.screencast = {
         max_fps = 30;
         chooser_type = "dmenu";
-        chooser_cmd = "${pkgs.bemenu}/bin/bemenu";
+        chooser_cmd = "/home/${config.user}/.config/scripts/screen-pick";
       };
     };
     extraPortals = with pkgs;[
@@ -188,7 +193,6 @@ in
       evsieve
       file
       ffmpeg-full
-      gamescope
       git-credential-manager
       glib
       grim
@@ -204,6 +208,7 @@ in
       jq
       libimobiledevice
       libstrangle
+      libu2f-host
       libusb1
       lon
       mlt
@@ -212,6 +217,7 @@ in
       openresolv
       pciutils
       p7zip
+      pam_u2f
       poppler-utils
       (python3.withPackages (ps: [ ps.evdev ps.dbus-python ps.flask ps.pygobject3 ps.pyusb ps.pypresence ps.pyserial  ps.huggingface-hub ]))
       rclone
@@ -237,6 +243,8 @@ in
       wl-clipboard
       wlsunset
       xxd
+      yubikey-manager
+      yubikey-personalization
       zenity
 
     # Games
