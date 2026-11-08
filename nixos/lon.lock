@@ -30,9 +30,9 @@
       "owner": "yigexuanmu",
       "repo": "waydroid-nvidia-nix",
       "branch": "main",
-      "revision": "180697edb1ea2c53fed49d6a07d20a39af563083",
-      "url": "https://github.com/yigexuanmu/waydroid-nvidia-nix/archive/180697edb1ea2c53fed49d6a07d20a39af563083.tar.gz",
-      "hash": "sha256-wh11g5RcmQR/vSPBG1q08wA9F9ZmS5IkJ97+OUVo9RU="
+      "revision": "28a092527b56f3ddba4592083bc7154d84599d79",
+      "url": "https://github.com/yigexuanmu/waydroid-nvidia-nix/archive/28a092527b56f3ddba4592083bc7154d84599d79.tar.gz",
+      "hash": "sha256-cSsOsBYSQziF6POOWlqVLKS8XGIwOhsz2exfxT/MXXE="
     }
   }
 }

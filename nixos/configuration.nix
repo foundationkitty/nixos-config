@@ -8,6 +8,11 @@ let
       config = config.nixpkgs.config;
     };
 
+    master = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/master)
+    {
+      config = config.nixpkgs.config;
+    };
+
     myfork = import (builtins.fetchTarball https://github.com/foundationkitty/nixpkgs/tarball/myfork)
     {
       config = config.nixpkgs.config;
@@ -18,7 +23,7 @@ let
       config = config.nixpkgs.config;
     };
 
-    wine = unstable.wineWow64Packages.stagingFull;
+    wine = master.wineWow64Packages.stagingFull;
 
 in
 {
@@ -67,7 +72,12 @@ in
     SUBSYSTEM=="usb", ATTRS{idVendor}=="1ccf", ATTRS{idProduct}=="1014", MODE="0666", TAG+="uaccess"
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="f822", ATTRS{idProduct}=="0148", GROUP="users", MODE="0660"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="f822", ATTRS{idProduct}=="0148", ENV{ID_MM_DEVICE_IGNORE}="1"
-  '';
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0e8f", MODE="0660", GROUP="users"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="0e8f", MODE="0660", GROUP="users"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0ca3", ATTRS{idProduct}=="0021", MODE="0660", GROUP="users"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="0ca3", ATTRS{idProduct}=="0021", MODE="0660", GROUP="users"
+    KERNEL=="ttyACM*", ATTRS{idVendor}=="0ca3", ATTRS{idProduct}=="0021", MODE="0660", GROUP="users", ENV{ID_MM_DEVICE_IGNORE}="1"
+ '';
 
   hardware.flipperzero.enable = true;
 
@@ -212,7 +222,6 @@ in
       libusb1
       lon
       mlt
-      msitools
       ncdu
       openresolv
       pciutils

@@ -135,11 +135,17 @@ in
     };
   };
 
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+    swaylock.u2fAuth = true;
+    swaylock.rules.auth.unix.order = config.security.pam.services.swaylock.rules.auth.u2f.order + 10;
+  };
+
   # Ports
 
   networking.firewall = {
-    allowedTCPPorts = [ 5700 11434 8000 8080 ];
-    allowedUDPPorts = [ 5700 ];
+    allowedTCPPorts = [ 11434 8000 8080 ];
   };
 
   # Docker
@@ -162,6 +168,7 @@ in
   # Appimage Libs
 
   programs.appimage.package = pkgs.appimage-run.override { extraPkgs = pkgs: [
+    pkgs.curlFull
     pkgs.zstd
     pkgs.libxcb-cursor
     pkgs.icu
@@ -173,8 +180,14 @@ in
 
   services.openssh.enable = true;
 
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [ obs-pipewire-audio-capture ];
+  };
+
   users.users.${config.user}.packages = with pkgs; [
     brightnessctl
+    chromium
     i3status
     (filebot.overrideAttrs (old: {
       src = pkgs.fetchurl {
