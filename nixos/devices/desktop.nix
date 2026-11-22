@@ -16,6 +16,7 @@ in
 
   imports = [
     ./pkgs/waydroid-nv.nix
+    ./pkgs/xvsr.nix
     lanzaboote.nixosModules.lanzaboote
   ];
 
@@ -175,6 +176,14 @@ in
   ]; };
 
   services.flatpak.enable = true;
+
+  programs.xvsr = {
+    enable = true;
+    output = "DP-2";
+  };
+
+  networking.firewall.trustedInterfaces = [ "eno1" ];
+
   services.jackett.enable = true;
   services.jackett.package = unstable.jackett;
 
