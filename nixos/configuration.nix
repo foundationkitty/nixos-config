@@ -77,6 +77,7 @@ in
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0ca3", ATTRS{idProduct}=="0021", MODE="0660", GROUP="users"
     KERNEL=="hidraw*", ATTRS{idVendor}=="0ca3", ATTRS{idProduct}=="0021", MODE="0660", GROUP="users"
     KERNEL=="ttyACM*", ATTRS{idVendor}=="0ca3", ATTRS{idProduct}=="0021", MODE="0660", GROUP="users", ENV{ID_MM_DEVICE_IGNORE}="1"
+    SUBSYSTEM=="sound", ACTION=="add", KERNEL=="controlC*", ATTRS{idVendor}=="3142", ATTRS{idProduct}=="a010", RUN+="${pkgs.alsa-utils}/bin/amixer -c %n sset Mic playback 0%% mute"
  '';
 
   hardware.flipperzero.enable = true;
@@ -177,7 +178,7 @@ in
       hunspellDicts.en_US
       ledfx
       libreoffice
-      unstable.iloader
+      master.iloader
       jellyfin-rpc
       kdePackages.kdenlive
       kdePackages.okular

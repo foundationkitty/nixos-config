@@ -183,6 +183,14 @@ in
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [ obs-pipewire-audio-capture ];
+    package = pkgs.symlinkJoin {
+      name = "obs-studio";
+      paths = [ pkgs.obs-studio ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+       wrapProgram $out/bin/obs --set __NV_DISABLE_EXPLICIT_SYNC 1
+      '';
+    };
   };
 
   users.users.${config.user}.packages = with pkgs; [
