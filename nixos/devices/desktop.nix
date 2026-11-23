@@ -96,7 +96,8 @@ in
 
   systemd.services.gpu-undervolt = {
     description = "Apply GPU undervolt";
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" "suspend.target" ];
+    after = [ "suspend.target" "nvidia-resume.service" ];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.python3.withPackages (ps: [ ps.nvidia-ml-py ])}/bin/python3 /home/${config.user}/.config/scripts/uv.py 1815 150";
