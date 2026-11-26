@@ -84,6 +84,7 @@ in
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
+    videoAcceleration = false;
     modesetting.enable = true;
     nvidiaPersistenced = true;
     powerManagement.enable = true;
@@ -92,6 +93,13 @@ in
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
+  };
+
+  hardware.graphics.extraPackages = [ unstable.nvidia-vaapi-driver ];
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
   };
 
   systemd.services.gpu-undervolt = {
@@ -205,7 +213,18 @@ in
 
   users.users.${config.user}.packages = with pkgs; [
     brightnessctl
-    chromium
+    (pkgs.chromium.override {
+      commandLineArgs = "--use-gl=angle --use-angle=gl --enable-features=VaapiVideoDecodeLinuxGL,VaapiOnNvidiaGPUs --ignore-gpu-blocklist";
+    })
+    (pkgs.callPackage ./pkgs/greenlight.nix {
+      flags = [
+        "--use-gl=angle"
+        "--use-angle=gl"
+        "--enable-features=AcceleratedVideoDecodeLinuxGL,VaapiVideoDecodeLinuxGL,VaapiOnNvidiaGPUs"
+        "--ignore-gpu-blocklist"
+        "--ozone-platform=x11"
+      ];
+    })
     i3status
     (filebot.overrideAttrs (old: {
       src = pkgs.fetchurl {
