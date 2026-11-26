@@ -1,6 +1,16 @@
 {
   "version": "1",
   "sources": {
+    "eacnix": {
+      "type": "GitHub",
+      "fetchType": "tarball",
+      "owner": "samos667",
+      "repo": "eacnix",
+      "branch": "main",
+      "revision": "f9b97b448fa2e8cb806f3ba542bdb75addc94dcb",
+      "url": "https://github.com/samos667/eacnix/archive/f9b97b448fa2e8cb806f3ba542bdb75addc94dcb.tar.gz",
+      "hash": "sha256-Iad9thJ9RM9z6KajIDRjHrHd0lEMm4GWqPjDS2oTL5U="
+    },
     "flake-compat": {
       "type": "GitHub",
       "fetchType": "tarball",

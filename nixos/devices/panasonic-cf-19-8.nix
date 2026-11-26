@@ -135,12 +135,12 @@ in
 
   users.users.${config.user}.packages = with pkgs; [
       brightnessctl
-      foxtrotgps
       gpsd
       i3status
       jellyfin
       lxappearance
       modem-manager-gui
+      viking
       wvkbd
   ];
 

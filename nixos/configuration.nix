@@ -179,7 +179,6 @@ in
       ledfx
       libreoffice
       master.iloader
-      jellyfin-rpc
       kdePackages.kdenlive
       kdePackages.okular
       proton-pass
