@@ -135,6 +135,7 @@ in
 
   users.users.${config.user}.packages = with pkgs; [
       brightnessctl
+      dxvk_2
       gpsd
       i3status
       jellyfin

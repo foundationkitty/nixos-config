@@ -210,7 +210,6 @@ in
       cargo-xwin
       corepack
       dislocker
-      dxvk
       e2fsprogs
       evsieve
       file

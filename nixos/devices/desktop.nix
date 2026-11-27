@@ -208,6 +208,7 @@ in
   users.users.${config.user}.packages = with pkgs; [
     brightnessctl
     chromium
+    dxvk
     (pkgs.callPackage ./pkgs/greenlight.nix {
       flags = [
         "--ozone-platform=x11"
