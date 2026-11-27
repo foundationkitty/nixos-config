@@ -17,6 +17,7 @@ in
   imports = [
     ./pkgs/waydroid-nv.nix
     ./pkgs/xvsr.nix
+    ./pkgs/eac.nix
     lanzaboote.nixosModules.lanzaboote
   ];
 
@@ -24,7 +25,7 @@ in
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = config.bootLoaderTimeout;
+  boot.loader.timeout = 0;
 
   boot.lanzaboote = {
     enable = true;
@@ -32,7 +33,7 @@ in
   };
 
   boot.kernelModules = [ "sg" "v4l2loopback" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.extraModulePackages = lib.mkIf (!config.eac.active) [ config.boot.kernelPackages.v4l2loopback ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=10 card_label="Vive Cam" exclusive_caps=1
   '';
@@ -181,6 +182,7 @@ in
   programs.xvsr = {
     enable = true;
     output = "DP-2";
+    lsfgPackage = pkgs.callPackage (unstable.path + "/pkgs/by-name/ls/lsfg-vk/package.nix") { };
   };
 
   networking.firewall.trustedInterfaces = [ "eno1" ];
@@ -207,7 +209,9 @@ in
     brightnessctl
     chromium
     (pkgs.callPackage ./pkgs/greenlight.nix {
-      flags = [ "--ozone-platform=x11" ];
+      flags = [
+        "--ozone-platform=x11"
+      ];
     })
     i3status
     (filebot.overrideAttrs (old: {
