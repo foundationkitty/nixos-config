@@ -208,19 +208,12 @@ in
   users.users.${config.user}.packages = with pkgs; [
     brightnessctl
     chromium
-    dxvk
     (pkgs.callPackage ./pkgs/greenlight.nix {
       flags = [
         "--ozone-platform=x11"
       ];
     })
     i3status
-    (filebot.overrideAttrs (old: {
-      src = pkgs.fetchurl {
-        url = "https://get.filebot.net/filebot/FileBot_${old.version}/FileBot_${old.version}-portable.tar.xz";
-        hash = "sha256-OcXXKaZcBuP584SJWeQB+aaxO0kih6Oiud0Vm8e9kPo=";
-      };
-    }))
     lxappearance
     unstable.makemkv
     v4l-utils
