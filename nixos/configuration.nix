@@ -187,7 +187,7 @@ in
       signal-desktop
       unstable.steam-rom-manager
       myfork.ticktick
-      vesktop
+      unstable.vesktop
       vlc
       vscodium
 

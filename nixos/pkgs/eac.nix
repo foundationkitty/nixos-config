@@ -98,7 +98,7 @@ in
     system.build.installBootLoader = lib.mkOverride 90 (pkgs.writeShellScript "install-lanzaboote-and-eacnix" ''
       ${config.boot.loader.external.installHook} "$@" || exit
       if ${config.system.build.eacnix.installCommand}; then
-        cat ${menuEntries} >> ${lib.escapeShellArg grubCfg}
+        ${pkgs.coreutils}/bin/cat ${menuEntries} >> ${lib.escapeShellArg grubCfg}
       else
         echo "warning: eacnix: the eac boot path was not updated (see above)." >&2
       fi

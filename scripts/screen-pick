@@ -2,7 +2,9 @@
 export PATH="/run/wrappers/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
 set -uo pipefail
 here="${BASH_SOURCE[0]%/*}"
+log="${XDG_RUNTIME_DIR:-/tmp}/screen-pick.log"
 mapfile -t labels
+{ echo "== $(date '+%F %T')"; printf 'label: %q\n' "${labels[@]}"; } >"$log"
 [ "${#labels[@]}" -gt 0 ] || exit 1
 
 declare -A mode=(); focused=""
@@ -25,7 +27,28 @@ for i in "${!labels[@]}"; do
   esac
 done
 
-choice=$(printf '%s' "$menu" | "$here/pick-menu" "Share") || exit 1
+tree=$(swaymsg -t get_tree -r 2>/dev/null) || tree=""
+prev=""; spot=""
+if [ -n "$tree" ]; then
+  prev=$(jq -r 'first(.. | objects | select(.focused? == true) | .id) // empty' <<<"$tree")
+  spot=$(jq -r '
+    def hidden: (.name | startswith("HEADLESS-"))
+      or (.current_workspace as $ws | [.nodes[] | select(.name == $ws) | .. | objects | select(.fullscreen_mode? == 1)] | length > 0);
+    [.nodes[] | select(.type == "output" and .name != "__i3")] as $outs
+    | ([$outs[] | select([.. | objects | select(.focused? == true)] | length > 0)] | first) as $cur
+    | if $cur == null or ($cur | hidden | not) then empty
+      else [$outs[] | select(hidden | not) | .name] | first // empty end' <<<"$tree")
+fi
+[ -n "$spot" ] && swaymsg -q "focus output $spot"
+
+choice=$(printf '%s' "$menu" | "$here/pick-menu" "Share"); rc=$?
+[ -n "$spot" ] && [ -n "$prev" ] && swaymsg -q "[con_id=$prev] focus"
+printf 'menu exit %s, choice: %q\n' "$rc" "$choice" >>"$log"
+[ "$rc" -eq 0 ] || exit 1
 n=$(sed -nE 's/^[^0-9]*([0-9]+)\..*/\1/p' <<<"$choice")
-[ -n "$n" ] && [ "$n" -ge 1 ] && [ "$n" -le "${#labels[@]}" ] || exit 1
+if ! { [ -n "$n" ] && [ "$n" -ge 1 ] && [ "$n" -le "${#labels[@]}" ]; }; then
+  echo "couldn't read a number from the choice (n=$n)" >>"$log"
+  exit 1
+fi
+printf 'reply: %q\n' "${labels[$((n - 1))]}" >>"$log"
 printf '%s\n' "${labels[$((n - 1))]}"

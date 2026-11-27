@@ -13,6 +13,7 @@ let
       : "''${XVSR_OUTPUT:=${cfg.output}}"
       : "''${XVSR_IN:=${cfg.streamResolution}}"
       : "''${XVSR_QUALITY:=${cfg.quality}}"
+      export XVSR_LSFG=${if cfg.lsfgPackage == null then "" else cfg.lsfgPackage}
     '' + builtins.readFile ./xvsr.sh;
   };
 in
@@ -33,6 +34,11 @@ in
     quality = lib.mkOption {
       type = lib.types.str;
       default = "STREAMING_ULTRA";
+     };
+
+     lsfgPackage = lib.mkOption {
+      type = lib.types.nullOr lib.types.package;
+      default = null;
     };
   };
 

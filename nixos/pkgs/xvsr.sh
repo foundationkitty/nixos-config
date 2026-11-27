@@ -8,6 +8,14 @@
 : "${XVSR_LIBS:=}"
 : "${XVSR_GAME:=Grand Theft Auto VI}"
 : "${XVSR_DISCORD_ID:=}"
+: "${XVSR_FX:=dedupe denoise cas deband}"
+: "${XVSR_FG:=6}"
+: "${XVSR_FG_FLOW:=0.75}"
+: "${XVSR_FG_PERF:=0}"
+: "${XVSR_LSFG:=}"
+: "${XVSR_LSFG_DLL:=}"
+: "${XVSR_DENOISE:=DENOISE_MEDIUM}"
+: "${XVSR_CAS:=0.4}"
 export XVSR_GAME XVSR_DISCORD_ID
 
 venv="${XDG_DATA_HOME:-$HOME/.local/share}/xvsr/venv"
@@ -53,8 +61,92 @@ target_res() {
   echo "$res"
 }
 
+fx_list() {
+  if [ ! -f "$conf/fx" ]; then
+    mkdir -p "$conf"
+    echo "$XVSR_FX" >"$conf/fx"
+  fi
+  cat "$conf/fx"
+}
+
+has_fx() {
+  [[ " $(fx_list) " == *" $1 "* ]]
+}
+
+fg_level() {
+  cat "$conf/fg" 2>/dev/null || echo "$XVSR_FG"
+}
+
+mpv_fx_args() {
+  has_fx deband && echo "--deband=yes"
+  has_fx vivid && printf '%s\n' "--saturation=12" "--contrast=4"
+  has_fx hdr && printf '%s\n' "--target-colorspace-hint=yes" "--inverse-tone-mapping=yes"
+  return 0
+}
+
+mpv_cmd() {
+  [ -S "$state/mpv.sock" ] || return 0
+  "$XVSR_PYTHON" - "$state/mpv.sock" "$@" <<'PY' || true
+import json, socket, sys
+s = socket.socket(socket.AF_UNIX)
+s.connect(sys.argv[1])
+s.sendall((json.dumps({"command": sys.argv[2:]}) + "\n").encode())
+PY
+}
+
+lsfg_dll() {
+  if [ -n "$XVSR_LSFG_DLL" ]; then
+    echo "$XVSR_LSFG_DLL"
+    return
+  fi
+  local d f
+  for d in "$HOME/.local/share/Steam" "$HOME/.steam/steam"; do
+    for f in lsfg-vk.dll Lossless.dll; do
+      if [ -f "$d/steamapps/common/Lossless Scaling/$f" ]; then
+        echo "$d/steamapps/common/Lossless Scaling/$f"
+        return
+      fi
+    done
+  done
+}
+
+fg_env() {
+  local n layer dll f
+  n=$(fg_level)
+  [ "$n" -gt 1 ] 2>/dev/null || return 0
+  if [ -z "$XVSR_LSFG" ]; then
+    msg "frame generation off: lsfg-vk isn't installed"
+    return 0
+  fi
+  layer=""
+  for f in "$XVSR_LSFG"/share/vulkan/*/*.json; do
+    [ -f "$f" ] && layer=$f && break
+  done
+  dll=$(lsfg_dll)
+  if [ -z "$layer" ]; then
+    msg "frame generation off: no lsfg-vk vulkan layer in $XVSR_LSFG"
+    return 0
+  fi
+  if [ -z "$dll" ]; then
+    msg "frame generation off: Lossless Scaling isn't installed in steam (or set XVSR_LSFG_DLL)"
+    return 0
+  fi
+  echo "VK_ADD_IMPLICIT_LAYER_PATH=$(dirname "$layer")"
+  echo "LSFGVK_ENV=1"
+  echo "LSFGVK_DLL_PATH=$dll"
+  echo "LSFGVK_MULTIPLIER=$n"
+  echo "LSFGVK_FLOW_SCALE=$XVSR_FG_FLOW"
+  [ "$XVSR_FG_PERF" = 1 ] && echo "LSFGVK_PERFORMANCE_MODE=1"
+  msg "frame generation: ${n}x"
+}
+
 show() {
-  mpv - --no-config --title=xvsr --wayland-app-id=xvsr \
+  local -a extra envs
+  mapfile -t extra < <(mpv_fx_args)
+  mapfile -t envs < <(fg_env)
+  rm -f "$state/mpv.sock"
+  env "${envs[@]}" mpv - --no-config --title=xvsr --wayland-app-id=xvsr \
+    --vo=gpu-next --gpu-api=vulkan --input-ipc-server="$state/mpv.sock" "${extra[@]}" \
     --demuxer=rawvideo --demuxer-rawvideo-w="${1%x*}" --demuxer-rawvideo-h="${1#*x}" \
     --demuxer-rawvideo-mp-format=rgb24 --demuxer-rawvideo-fps="$XVSR_FPS" \
     --untimed --cache=no --demuxer-readahead-secs=0 --video-latency-hacks=yes \
@@ -155,7 +247,8 @@ start() {
       rpc_pid=$!
     fi
     wf-recorder -o "$hl" -c rawvideo -x bgr0 -m rawvideo -f pipe:1 |
-      (filter --in "$XVSR_IN" --in-fmt bgr0 --out "$res" --quality "$XVSR_QUALITY" --stats 10) |
+      (filter --in "$XVSR_IN" --in-fmt bgr0 --out "$res" --quality "$XVSR_QUALITY" --stats 10 \
+        --fx "$(fx_list)" --fx-file "$conf/fx" --denoise "$XVSR_DENOISE" --cas "$XVSR_CAS") |
       show "$res" --fs --fs-screen-name="$XVSR_OUTPUT"
     msg "$(date +%T) stopped"
     [ -z "$rpc_pid" ] || kill "$rpc_pid" 2>/dev/null || true
@@ -203,7 +296,8 @@ test_file() {
   ffmpeg -nostdin -hide_banner -loglevel error -re -i "$file" -an \
     -vf "scale=${XVSR_IN%x*}:${XVSR_IN#*x}:flags=bicubic" \
     -f rawvideo -pix_fmt rgb24 pipe:1 |
-    (filter --in "$XVSR_IN" --in-fmt rgb24 --out "$res" --quality "$XVSR_QUALITY" --stats 5) |
+    (filter --in "$XVSR_IN" --in-fmt rgb24 --out "$res" --quality "$XVSR_QUALITY" --stats 5 \
+      --fx "$(fx_list)" --fx-file "$conf/fx" --denoise "$XVSR_DENOISE" --cas "$XVSR_CAS") |
     show "$res" || true
   rm -f "$state/pid"
 }
@@ -433,6 +527,61 @@ rpc_on() {
   [ ! -f "$conf/rpc-off" ]
 }
 
+fx() {
+  local all="dedupe denoise cas deband vivid hdr" name on f
+  if [ $# -eq 0 ]; then
+    for name in $all; do
+      if has_fx "$name"; then on="on"; else on="off"; fi
+      printf '%-8s %s\n' "$name" "$on"
+    done
+    echo "frame gen: $(fg_level)x"
+    return
+  fi
+  name=$1
+  [[ " $all " == *" $name "* ]] || die "unknown effect '$name' (one of: $all)"
+  local -a cur keep=()
+  read -ra cur <<<"$(fx_list)"
+  on=yes
+  for f in "${cur[@]}"; do
+    if [ "$f" = "$name" ]; then on=no; else keep+=("$f"); fi
+  done
+  [ "$on" = yes ] && keep+=("$name")
+  echo "${keep[*]}" >"$conf/fx.new"
+  mv "$conf/fx.new" "$conf/fx"
+  case "$name" in
+    deband) mpv_cmd set deband "$on" ;;
+    vivid)
+      if [ "$on" = yes ]; then mpv_cmd set saturation 12; mpv_cmd set contrast 4
+      else mpv_cmd set saturation 0; mpv_cmd set contrast 0; fi
+      ;;
+    hdr)
+      mpv_cmd set target-colorspace-hint "$on"
+      mpv_cmd set inverse-tone-mapping "$on"
+      ;;
+  esac
+  msg "$name $([ "$on" = yes ] && echo on || echo off)"
+}
+
+fg() {
+  if [ $# -eq 0 ]; then
+    echo "frame gen: $(fg_level)x"
+    return
+  fi
+  local n=$1
+  [ "$n" = off ] && n=1
+  [[ "$n" =~ ^[0-9]+$ ]] && [ "$n" -ge 1 ] || die "usage: xvsr fg [2-8|off]"
+  mkdir -p "$conf"
+  echo "$n" >"$conf/fg"
+  if running; then
+    msg "restarting to apply ${n}x"
+    stop
+    sleep 0.5
+    start
+  else
+    msg "frame gen ${n}x, applies on next start"
+  fi
+}
+
 game() {
   if [ $# -eq 0 ]; then
     if [ -f "$state/game" ]; then cut -f2 "$state/game"; else echo "$XVSR_GAME"; fi
@@ -453,6 +602,8 @@ status() {
     echo "not running"
   fi
   if rpc_on; then echo "discord: $(game)"; else echo "discord: off"; fi
+  echo "effects: $(fx_list)"
+  echo "frame gen: $(fg_level)x"
   if have_venv; then
     echo "venv ok: $venv"
   else
@@ -492,13 +643,15 @@ case "${1:-}" in
     esac
     ;;
   game) shift; game "$@" ;;
+  fx) shift; fx "$@" ;;
+  fg) shift; fg "$@" ;;
   find)
     shift
     write_rpc
     "$XVSR_PYTHON" "$rpc_py" --find "$*" | cut -f2
     ;;
   *)
-    echo "usage: xvsr setup|start|stop|toggle|ab|test FILE|status|rpc [on|off]|game [NAME]|find NAME" >&2
+    echo "usage: xvsr setup|start|stop|toggle|ab|test FILE|status|fx [NAME]|fg [N|off]|rpc [on|off]|game [NAME]|find NAME" >&2
     exit 1
     ;;
 esac
