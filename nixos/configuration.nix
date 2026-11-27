@@ -93,7 +93,6 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
   };
 
   # Printing
@@ -140,7 +139,16 @@ in
 
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
-  programs.steam.extraPackages = [ pkgs.gamescope ];
+  programs.steam.extraPackages = [ pkgs.gamescope pkgs.perl ];
+  programs.steam.package = pkgs.steam.override {
+    extraLibraries = p: with p; [
+      alsa-lib dbus fontconfig freetype gmp gnutls libgcrypt
+      libpulseaudio libusb1 opus pcsclite pipewire SDL2
+      stdenv.cc.cc.lib wayland
+      libx11 libxcomposite libxcursor libxext libxfixes libxi
+      libxinerama libxrandr libxrender libxxf86vm
+    ];
+  };
 
   hardware.xpadneo.enable = true;
 
@@ -194,8 +202,12 @@ in
     # Tools
       alsa-utils
       android-tools
+      autoconf
+      automake
       bemenu
       binutils
+      bison
+      cargo-xwin
       corepack
       dislocker
       dxvk
@@ -203,8 +215,11 @@ in
       evsieve
       file
       ffmpeg-full
+      flex
+      gcc
       git-credential-manager
       glib
+      gnumake
       grim
       gsettings-desktop-schemas
       gst_all_1.gstreamer
@@ -220,6 +235,9 @@ in
       libstrangle
       libu2f-host
       libusb1
+      llvmPackages.clang-unwrapped
+      llvmPackages.lld
+      llvmPackages.llvm
       lon
       mlt
       ncdu
@@ -227,9 +245,12 @@ in
       pciutils
       p7zip
       pam_u2f
+      patch
+      pkg-config
       poppler-utils
       (python3.withPackages (ps: [ ps.evdev ps.dbus-python ps.flask ps.pygobject3 ps.pyusb ps.pypresence ps.pyserial  ps.huggingface-hub ]))
       rclone
+      rustup
       sbctl
       screen
       unstable.sgdboop
@@ -260,7 +281,7 @@ in
       cdecrypt
       cemu
       dolphin-emu
-      myfork.dusklight
+      unstable.dusklight
       gzdoom
       (melonds.overrideAttrs (old: {
         pname = "melonDS-x432r-plus";
