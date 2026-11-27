@@ -212,6 +212,7 @@ in
       dislocker
       e2fsprogs
       evsieve
+      expect
       file
       ffmpeg-full
       flex
