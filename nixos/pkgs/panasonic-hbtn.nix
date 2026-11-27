@@ -1,32 +1,40 @@
-{ stdenv, fetchFromGitHub, kernel }:
+{ stdenv, fetchFromGitHub, kernel, kernelModuleMakeFlags }:
 
-stdenv.mkDerivation rec {
+let
+  kdir = "${kernel.dev}/lib/modules/${kernel.modDirVersion}/build";
+in
+stdenv.mkDerivation {
   pname = "panasonic-hbtn";
-  version = "0";
+  version = "0-${kernel.version}";
 
   src = fetchFromGitHub {
     owner = "foundationkitty";
     repo = "panasonic-hbtn";
-    rev = "4534dec";
-    sha256 = "9GDG+3EwiJQ+0FDliFe4AtB1LbQ+9UZozgCzx320F0s=";
+    rev = "d5c437e";
+    sha256 = "sha256-yxPvNrZWl9+QfjoA/LMbv4TmJ+Gx0lW/AeEB4wQ+e8U=";
   };
-
-  KVER = "${kernel.modDirVersion}";
-
-  buildPhase = ''
-    make -C ${kernel.dev}/lib/modules/${kernel.modDirVersion}/build M=$(pwd) modules
-  '';
-
-  installPhase = ''
-    mkdir -p $out/lib/modules/${KVER}/kernel/drivers/panasonic-hbtn/
-    cp panasonic-hbtn.ko $out/lib/modules/${KVER}/kernel/drivers/panasonic-hbtn/
-  '';
 
   nativeBuildInputs = kernel.moduleBuildDependencies;
 
-  makeFlags = [
+  makeFlags = kernelModuleMakeFlags ++ [
     "KERNELRELEASE=${kernel.modDirVersion}"
-    "KERNEL_DIR=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
-  ] ;
-}
+    "INSTALL_MOD_PATH=${placeholder "out"}"
+    "INSTALL_MOD_DIR=kernel/drivers/panasonic-hbtn"
+  ];
 
+  buildPhase = ''
+    runHook preBuild
+    local flagsArray=()
+    concatTo flagsArray makeFlags
+    make -C ${kdir} M=$(pwd) "''${flagsArray[@]}" modules
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+    local flagsArray=()
+    concatTo flagsArray makeFlags
+    make -C ${kdir} M=$(pwd) "''${flagsArray[@]}" modules_install
+    runHook postInstall
+  '';
+}
