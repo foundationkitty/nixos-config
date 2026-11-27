@@ -17,7 +17,7 @@ in
   services.waydroid-nvidia = {
     enable = true;
     package = pkgs.waydroid-nvidia-full;
-    mode = "nvidia-prolapse";
+    mode = "venus";
     refreshRate = 120;
   };
 
