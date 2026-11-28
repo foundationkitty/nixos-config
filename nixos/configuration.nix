@@ -143,7 +143,7 @@ in
   programs.steam.package = pkgs.steam.override {
     extraLibraries = p: with p; [
       alsa-lib dbus fontconfig freetype gmp gnutls libgcrypt
-      libpulseaudio libusb1 opus pcsclite pipewire SDL2
+      libpulseaudio libusb1 opus pcsclite pipewire SDL2 sdl3
       stdenv.cc.cc.lib wayland
       libx11 libxcomposite libxcursor libxext libxfixes libxi
       libxinerama libxrandr libxrender libxxf86vm

@@ -37,8 +37,8 @@ in
      };
 
      lsfgPackage = lib.mkOption {
-      type = lib.types.nullOr lib.types.package;
-      default = null;
+       type = lib.types.nullOr lib.types.package;
+       default = null;
     };
   };
 
